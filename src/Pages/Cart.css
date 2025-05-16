@@ -1,0 +1,80 @@
+.custom-modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    max-width: 500px;
+    margin: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .modal-header {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .modal-label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .modal-input,
+  .modal-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #f9f9f9;
+    transition: border-color 0.2s;
+  }
+  
+  .modal-input:focus,
+  .modal-textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #fff;
+  }
+  
+  .modal-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .modal-button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .modal-button:hover {
+    background: #0056b3;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  

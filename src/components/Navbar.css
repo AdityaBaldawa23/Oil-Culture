@@ -1,0 +1,210 @@
+nav.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 18px 0;
+  background: linear-gradient(135deg, rgba(255, 210, 127, 0.95), rgba(255, 183, 77, 0.95));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #333;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 20px rgba(211, 140, 63, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* When scrolled - more subtle and refined */
+nav.navbar.scrolled {
+  background: rgba(255, 222, 173, 0.9);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 10px 0;
+  color: #333;
+}
+
+/* Container inside navbar */
+nav.navbar .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo styling with enhanced visibility and contrast */
+nav.navbar .logo {
+  font-size: 2rem;
+  font-weight: 800;
+  font-style: italic;
+  background: linear-gradient(135deg, #ff6b00, #ff3d00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
+}
+
+nav.navbar .logo:hover {
+  transform: scale(1.08) translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Nav links container with improved spacing */
+nav.navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+/* Nav link base with glass morphism */
+nav.navbar .nav-links a,
+nav.navbar .nav-links button {
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.3px;
+}
+
+/* Hover effect with subtle glow */
+nav.navbar .nav-links a:hover,
+nav.navbar .nav-links button:hover {
+  background-color: rgba(255, 179, 0, 0.9);
+  color: #1e272e;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 179, 0, 0.4);
+}
+
+/* Link hover effect with sheen animation */
+nav.navbar .nav-links a::before,
+nav.navbar .nav-links button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.7s ease;
+}
+
+nav.navbar .nav-links a:hover::before,
+nav.navbar .nav-links button:hover::before {
+  left: 100%;
+}
+
+/* Active link style with pulsing effect */
+nav.navbar .nav-links a.active {
+  background-color: rgba(255, 193, 7, 0.4);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.6);
+  position: relative;
+}
+
+nav.navbar .nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+}
+
+/* Cart badge with 3D effect and bounce animation */
+nav.navbar .cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: badge-pulse 2s infinite;
+}
+
+@keyframes badge-pulse {
+  0% { transform: scale(1); }
+  5% { transform: scale(1.2); }
+  10% { transform: scale(1); }
+  15% { transform: scale(1.1); }
+  20% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+/* Logout button with refined styling */
+nav.navbar .logout-btn {
+  background: transparent;
+  border: 2px solid #ff6b00;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  color: #ff6b00;
+}
+
+nav.navbar.scrolled .logout-btn {
+  color: #ff6b00;
+  border-color: #ff6b00;
+}
+
+nav.navbar:not(.scrolled) .logout-btn {
+  color: #ff6b00;
+  border-color: #ff6b00;
+}
+
+nav.navbar .logout-btn:hover {
+  background: rgba(255, 107, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+/* Media query for responsive adjustments */
+@media screen and (max-width: 768px) {
+  nav.navbar .nav-links {
+    gap: 10px;
+  }
+  
+  nav.navbar .nav-links a,
+  nav.navbar .nav-links button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  nav.navbar .logo {
+    font-size: 1.8rem;
+  }
+}

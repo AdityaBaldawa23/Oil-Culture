@@ -1,0 +1,236 @@
+/* General body styling */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #fff;
+}
+
+/* Profile container */
+.profile-container {
+  display: flex;
+  flex-direction: row; /* Default layout with sidebar and content side by side */
+  height: 88vh;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 240px;
+  background-color: rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  color: #a78bfa;
+  font-size: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 12px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  color: #cbd5e1;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.sidebar li:hover {
+  background-color: #374151;
+}
+
+.sidebar li.active {
+  background-color: #6d28d9;
+  color: white;
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  padding: 40px;
+  background-color: #0f172a;
+}
+
+.content h1 {
+  font-size: 28px;
+  color: #a78bfa;
+  margin-bottom: 10px;
+}
+
+.content p {
+  color: #cbd5e1;
+}
+
+/* Profile card styling */
+.profile-card {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 20px rgba(165, 105, 255, 0.3);
+  color: #fff;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.profile-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #c084fc;
+}
+
+.profile-picture {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture img {
+  border-radius: 50%;
+  border: 3px solid #a78bfa;
+  width: 100px;
+  height: 100px;
+}
+
+.profile-fields label {
+  display: block;
+  margin: 15px 0;
+  color: #e5e7eb;
+}
+
+.profile-fields input,
+.profile-fields textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  background-color: #374151;
+  color: white;
+}
+
+.save-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #8b5cf6;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.save-btn:hover {
+  background-color: #a78bfa;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries for Responsiveness */
+
+/* For tablets and small screens */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column; /* Stack sidebar and content on top of each other */
+  }
+
+  .sidebar {
+    width: 100%; /* Full width for sidebar on smaller screens */
+    padding: 15px;
+    box-shadow: none; /* Remove shadow for smaller screens */
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .profile-card {
+    width: 90%; /* Make profile card width responsive */
+    margin: 10px auto;
+  }
+
+  .profile-title {
+    font-size: 1.5rem; /* Adjust title size for smaller screens */
+  }
+
+  .profile-picture img {
+    width: 80px; /* Adjust profile picture size */
+    height: 80px;
+  }
+
+  .save-btn {
+    width: 100%; /* Make save button full width on small screens */
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 480px) {
+  .profile-container {
+    height: auto; /* Adjust height for mobile */
+  }
+
+  .sidebar {
+    width: 100%; /* Sidebar takes full width */
+    padding: 10px;
+  }
+
+  .profile-card {
+    width: 95%; /* Card width smaller for mobile */
+    padding: 20px;
+  }
+
+  .profile-title {
+    font-size: 1.3rem; /* Smaller title on mobile */
+  }
+
+  .profile-fields input,
+  .profile-fields textarea {
+    font-size: 0.9rem; /* Adjust input and textarea font size */
+  }
+
+  .save-btn {
+    padding: 10px 20px; /* Adjust button padding */
+    font-size: 0.9rem; /* Adjust button font size */
+  }
+}
+
+.order-scroll-container {
+  max-height: 70vh; /* Adjust height as needed */
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #007bff #f1f1f1;
+}
+
+/* Optional: Style scrollbar for Webkit browsers */
+.order-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.order-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.order-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 10px;
+}

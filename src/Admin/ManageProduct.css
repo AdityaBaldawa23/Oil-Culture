@@ -1,0 +1,378 @@
+/* Container */
+.container-product {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Grid 2x2 buttons */
+.grid1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Buttons base style */
+.btn1 {
+  padding: 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  height: 300px;
+}
+
+.btn1:focus-visible {
+  outline: 3px solid #3333ff;
+  outline-offset: 2px;
+}
+
+/* Specific button colors */
+.add {
+  background-color: #007bff;
+  box-shadow: 0 4px 14px rgba(0,123,255,0.5);
+}
+.add:hover {
+  background-color: #0056b3;
+  box-shadow: 0 6px 18px rgba(0,86,179,0.6);
+}
+
+.update {
+  background-color: #28a745;
+  box-shadow: 0 4px 14px rgba(40,167,69,0.5);
+}
+.update:hover {
+  background-color: #1e7e34;
+  box-shadow: 0 6px 18px rgba(30,126,52,0.6);
+}
+
+.view {
+  background-color: #ffc107;
+  color: #212529;
+  box-shadow: 0 4px 14px rgba(255,193,7,0.5);
+}
+.view:hover {
+  background-color: #e0a800;
+  box-shadow: 0 6px 18px rgba(224,168,0,0.6);
+}
+
+.delete {
+  background-color: #dc3545;
+  box-shadow: 0 4px 14px rgba(220,53,69,0.5);
+}
+.delete:hover {
+  background-color: #a71d2a;
+  box-shadow: 0 6px 18px rgba(167,29,42,0.6);
+}
+
+/* Modal Overlays */
+.manage-product-modal-overlay,
+.update-product-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeInOverlay 0.4s ease forwards;
+  backdrop-filter: blur(6px);
+}
+
+/* Modal Containers */
+.manage-product-modal,
+.update-product-modal {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 440px;
+  width: 90%;
+  padding: 30px 32px;
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.15),
+    0 6px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  animation: slideInModal 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Modal Animations */
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInModal {
+  0% {
+    opacity: 0;
+    transform: translateY(-25px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal Heading */
+.manage-product-modal h2,
+.update-product-modal h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+  color: #222222;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* Form Inputs & Textarea */
+.manage-product-modal input,
+.manage-product-modal select,
+.manage-product-modal textarea,
+.update-product-modal input,
+.update-product-modal select,
+.update-product-modal textarea {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333333;
+  font-family: inherit;
+  background: #fafafa;
+  box-shadow: inset 2px 2px 8px rgba(255, 255, 255, 0.9),
+              inset -2px -2px 8px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: vertical;
+  min-height: 50px;
+}
+
+.manage-product-modal input:focus,
+.manage-product-modal textarea:focus,
+.update-product-modal input:focus,
+.update-product-modal textarea:focus {
+  border-color: #007bff;
+  box-shadow:
+    0 0 12px rgba(0, 123, 255, 0.6),
+    inset 2px 2px 12px rgba(0, 123, 255, 0.2);
+  background: #fff;
+  outline: none;
+  color: #111;
+}
+
+/* Modal Buttons Container */
+.manage-product-modal .modal-buttons,
+.update-product-modal .modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+/* Buttons Styling */
+.btn.submit {
+  background: linear-gradient(135deg, #28a745, #218838);
+  padding: 14px 28px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 14px;
+  box-shadow:
+    0 6px 18px rgba(33, 136, 56, 0.7),
+    0 2px 8px rgba(33, 136, 56, 0.5);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+  user-select: none;
+}
+
+.btn.submit:hover {
+  background: linear-gradient(135deg, #218838, #1c6c2e);
+  box-shadow:
+    0 10px 25px rgba(28, 108, 46, 0.85),
+    0 4px 12px rgba(28, 108, 46, 0.6);
+}
+
+.btn.cancel {
+  background: linear-gradient(135deg, #6c757d, #5a6268);
+  padding: 14px 28px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 14px;
+  box-shadow:
+    0 6px 18px rgba(90, 98, 104, 0.7),
+    0 2px 8px rgba(90, 98, 104, 0.5);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+  user-select: none;
+}
+
+.btn.cancel:hover {
+  background: linear-gradient(135deg, #5a6268, #4b5257);
+  box-shadow:
+    0 10px 25px rgba(75, 82, 87, 0.85),
+    0 4px 12px rgba(75, 82, 87, 0.6);
+}
+
+/* Smooth text selection prevention for buttons */
+.btn {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Responsive tweak */
+@media (max-width: 480px) {
+  .manage-product-modal,
+  .update-product-modal {
+    padding: 24px 20px;
+  }
+  .manage-product-modal h2,
+  .update-product-modal h2 {
+    font-size: 1.5rem;
+  }
+  .btn.submit, .btn.cancel {
+    padding: 12px 22px;
+    font-size: 0.9rem;
+  }
+}
+
+
+.view-products-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.view-products-modal {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.view-products-modal h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 26px;
+  color: #333;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  background: #d32f2f;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product-item {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 260px;
+  transition: transform 0.2s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-4px);
+}
+
+.product-item h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.product-item p {
+  margin: 6px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.product-item .desc {
+  font-size: 13px;
+  color: #777;
+  height: 40px;
+  overflow: hidden;
+}
+
+.product-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.product-actions button {
+  flex: 1;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.product-actions button:first-child {
+  background-color: #3498db;
+  color: white;
+}
+
+.product-actions button:first-child:hover {
+  background-color: #2980b9;
+}
+
+.product-actions button:last-child {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.product-actions button:last-child:hover {
+  background-color: #c0392b;
+}

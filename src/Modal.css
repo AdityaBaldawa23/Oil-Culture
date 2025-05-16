@@ -1,0 +1,51 @@
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+/* Modal Content */
+.modal-content {
+  background: white;
+  padding: 2rem;
+  width: 90%;
+  max-width: 650px;
+  position: relative;
+  border-radius: 8px; /* Optional: adds rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow */
+}
+
+/* Close Button */
+.btn-close {
+  position: absolute;
+  top: 0.5rem; /* Adjusted top position for centering */
+  right: 0.5rem; /* Adjusted right position for centering */
+  background: red; /* Full red background */
+  border: none;
+  border-radius: 50%; /* Makes the button round */
+  width: 35px; /* Size of the button */
+  height: 35px; /* Size of the button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white; /* White color for the 'X' */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.btn-close:hover {
+  background-color: #ff0000; /* Darker red on hover */
+}
+
+.btn-close:focus {
+  outline: none; /* Removes focus outline */
+}
