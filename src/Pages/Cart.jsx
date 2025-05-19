@@ -80,13 +80,13 @@
       };
 
       try {
-        const res1 = await fetch("http://localhost:5000/api/orderdata", {
+        const res1 = await fetch("https://rama-mangoes.onrender.com/api/orderdata", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(orderDetails),
         });
 
-        const res2 = await fetch("http://localhost:5000/place-order", {
+        const res2 = await fetch("https://rama-mangoes.onrender.com/place-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(emailPayload),

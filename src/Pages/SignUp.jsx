@@ -25,7 +25,7 @@ export default function SignUp() {
       return;
     }
 
-    const response = await fetch("http://localhost:5000/api/login/CreateUser", {
+    const response = await fetch("https://rama-mangoes.onrender.com/api/login/CreateUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
