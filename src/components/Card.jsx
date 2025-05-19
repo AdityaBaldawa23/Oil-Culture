@@ -8,11 +8,14 @@ export default function Card({ item }) {
   const [hover, setHover] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
+  const userEmail = localStorage.getItem("userEmail");
+  const isLoggedIn = Boolean(userEmail);
   const HandleAddToCart = async () => {
-    let existingItem = data.find(
-      (cartItem) =>
-        cartItem.id === item._id
-    );
+    if (!isLoggedIn) {
+      alert("Please log in to add items to your cart.");
+      return;
+    }
+    let existingItem = data.find((cartItem) => cartItem.id === item._id);
 
     if (existingItem) {
       await dispatch({
@@ -22,7 +25,7 @@ export default function Card({ item }) {
         price: item.price,
         quantity: quantity,
       });
-    }else{
+    } else {
       await dispatch({
         type: "ADD",
         id: item._id,
@@ -31,10 +34,7 @@ export default function Card({ item }) {
         quantity: quantity,
       });
     }
-    console.log(data);
   };
-
-  console.log("Image Source:", item.img);
 
   return (
     <div
@@ -56,7 +56,7 @@ export default function Card({ item }) {
       onMouseLeave={() => setHover(false)}
     >
       <div
-        style={{ height: "180px", overflow: "hidden", position: "relative" }}
+        style={{ height: "350px", overflow: "hidden", position: "relative" }}
       >
         <img
           src={item.img}
@@ -113,10 +113,14 @@ export default function Card({ item }) {
             marginBottom: "16px",
           }}
         >
-          <div style={{ display: "flex", gap: "8px" }}>
-            <select
+          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+            <label style={{ fontSize: "1rem", color: "red" }}>
+              Enter Desired Quantity
+            </label>
+            <input
+              type="number"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => setQuantity(Number(e.target.value))}
               style={{
                 padding: "8px 12px",
                 borderRadius: "8px",
@@ -126,69 +130,54 @@ export default function Card({ item }) {
                 fontWeight: "500",
                 color: "#2d3436",
                 cursor: "pointer",
-                width: "60px",
+                width: "100%",
               }}
-            >
-              {Array.from(Array(6), (_, i) => (
-                <option key={i + 1} value={i + 1}>
-                  {i + 1}
-                </option>
-              ))}
-            </select>
-
-            {/* <select
-              value={selectedVariant}
-              onChange={(e) => setSelectedVariant(e.target.value)}
-              style={{
-                padding: "8px 12px",
-                borderRadius: "8px",
-                border: "1px solid #dfe6e9",
-                backgroundColor: "#f5f6fa",
-                fontSize: "0.9rem",
-                fontWeight: "500",
-                color: "#2d3436",
-                cursor: "pointer",
-                width: "80px",
-              }}
-            >
-              {item.options &&
-                Object.keys(item.options[0])
-                  .filter((key) => key !== "_id")
-                  .map((key) => (
-                    <option key={key} value={key}>
-                      {key.charAt(0).toUpperCase() + key.slice(1)}
-                    </option>
-                  ))}
-            </select> */}
+            />
           </div>
 
           <div
-            style={{ fontWeight: "700", fontSize: "1.2rem", color: "#6c5ce7" }}
+            style={{
+              fontWeight: "700",
+              fontSize: "1.2rem",
+              color: "#6c5ce7",
+              paddingTop: "25px",
+            }}
           >
             ₹{item.price * quantity}
           </div>
         </div>
 
         <button
+          disabled={!isLoggedIn}
+          onClick={(e) => {
+            if (!isLoggedIn) {
+              e.preventDefault();
+              alert("Please log in to add items to your cart.");
+              return;
+            }
+            HandleAddToCart();
+          }}
           style={{
             width: "100%",
             padding: "10px",
             border: "none",
             borderRadius: "8px",
-            background: hover
-              ? "linear-gradient(45deg, #6c5ce7, #a29bfe)"
-              : "linear-gradient(45deg, #8e44ad, #6c5ce7)",
+            background: !isLoggedIn
+              ? "gray"
+              : hover
+              ? "linear-gradient(135deg, #ff6b00, #ff3d00)"
+              : "linear-gradient(45deg, #ff6b00, #ff3d00)",
             color: "white",
             fontWeight: "600",
-            cursor: "pointer",
+            cursor: !isLoggedIn ? "not-allowed" : "pointer",
+            opacity: !isLoggedIn ? 0.6 : 1,
             transition: "all 0.3s ease",
             boxShadow: hover
               ? "0 5px 15px rgba(108, 92, 231, 0.4)"
               : "0 2px 10px rgba(108, 92, 231, 0.2)",
           }}
-          onClick={HandleAddToCart}
         >
-          Add to Cart
+          {isLoggedIn ? "Add to Cart" : "Login to Add"}
         </button>
       </div>
     </div>

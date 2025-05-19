@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ManageProduct.css";
-import Navbar from "../components/Navbar";
+import AdminNavbar from "../components/AdminNavbar";
 import axios from "axios";
 
 export default function ManageProduct() {
@@ -114,6 +114,7 @@ export default function ManageProduct() {
         }
       );
       alert("Product added successfully!");
+      console.log(res);
       fetchProducts();
     } catch (err) {
       console.error("Error adding product:", err);
@@ -146,17 +147,11 @@ export default function ManageProduct() {
 
   return (
     <>
-      <Navbar />
+      <AdminNavbar />
       <div className="container-product">
         <div className="grid1">
           <button className="btn1 add" onClick={() => setShowAddModal(true)}>
             Add Product
-          </button>
-          <button
-            className="btn1 update"
-            onClick={() => setShowUpdateModal(true)}
-          >
-            Update Product
           </button>
           <button className="btn1 view" onClick={fetchProducts}>
             View Products

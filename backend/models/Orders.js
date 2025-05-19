@@ -28,6 +28,10 @@ const OrderSchema = new Schema({
     Order_Date: {
         type: Date,
         required: true
+    },
+    status: {
+        type: String,
+        default: "pending"
     }
 });
 

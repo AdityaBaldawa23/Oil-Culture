@@ -1,80 +1,109 @@
 .custom-modal {
-    background: #fff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
-    max-width: 500px;
-    margin: auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    animation: fadeIn 0.3s ease-in-out;
+  background: #ffffff;
+  padding: 32px 28px;
+  border-radius: 20px;
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.15);
+  max-width: 480px;
+  width: 90%;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1a1a1a;
+  animation: fadeIn 0.35s ease-in-out;
+  box-sizing: border-box;
+}
+
+.modal-header {
+  font-size: 24px;
+  margin-bottom: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  color: #212529;
+}
+
+.modal-label {
+  display: block;
+  margin-top: 18px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #343a40;
+}
+
+.modal-input,
+.modal-textarea {
+  color: black;
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 6px;
+  border: 1px solid #ced4da;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: bolder;
+  background-color: #f8f9fa;
+  transition: border-color 0.3s, background-color 0.3s;
+  box-sizing: border-box;
+}
+
+.modal-input:focus,
+.modal-textarea:focus {
+  border-color: #0d6efd;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.modal-textarea {
+  resize: vertical;
+  min-height: 90px;
+  max-height: 160px;
+}
+
+.modal-button {
+  margin-top: 30px;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.modal-button:hover {
+  background: linear-gradient(135deg, #0056b3, #004095);
+  transform: scale(1.02);
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
   }
-  
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .custom-modal {
+    padding: 24px 20px;
+  }
+
   .modal-header {
-    font-size: 22px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
+    font-size: 20px;
   }
-  
-  .modal-label {
-    display: block;
-    margin-top: 15px;
-    font-weight: 600;
-    font-size: 14px;
-  }
-  
+
   .modal-input,
   .modal-textarea {
-    width: 100%;
-    padding: 10px 14px;
-    margin-top: 6px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 15px;
-    background-color: #f9f9f9;
-    transition: border-color 0.2s;
+    font-size: 14px;
   }
-  
-  .modal-input:focus,
-  .modal-textarea:focus {
-    border-color: #007bff;
-    outline: none;
-    background-color: #fff;
-  }
-  
-  .modal-textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-  
+
   .modal-button {
-    margin-top: 25px;
-    width: 100%;
+    font-size: 15px;
     padding: 12px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
   }
-  
-  .modal-button:hover {
-    background: #0056b3;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
+}  

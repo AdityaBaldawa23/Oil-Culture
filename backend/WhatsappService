@@ -1,0 +1,35 @@
+const twilio = require("twilio");
+require("dotenv").config();
+
+const client = new twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
+
+function WhatsappService(order) {
+  const itemsList = order.items
+    .map((item) => `${item.name} x${item.quantity}`)
+    .join(", ");
+
+  const messageBody = `
+Hi ${order.name} 👋,
+
+Thank you for your order at *Rama Mangoes*!
+🧾 Order ID: ${order.id}
+💰 Total: ₹${order.total}
+📦 Items: ${itemsList}
+
+We'll notify you when your order is out for delivery.
+  `;
+
+  client.messages
+    .create({
+      from: `whatsapp:+14155238886`,
+      to: `whatsapp:+919028802444`, // Example: whatsapp:+91XXXXXXXXXX
+      body: messageBody,
+    })
+    .then((message) => console.log("✅ WhatsApp sent:", message.sid))
+    .catch((error) => console.error("❌ WhatsApp error:", error));
+}
+
+module.exports = WhatsappService;

@@ -84,12 +84,6 @@ const Profile = () => {
             >
               📦 Orders & Returns
             </li>
-            <li
-              onClick={() => handleSectionClick("delete")}
-              className={activeSection === "delete" ? "active" : ""}
-            >
-              🗑️ Delete Account
-            </li>
           </ul>
         </div>
 
@@ -220,14 +214,6 @@ const Profile = () => {
                     ))}
                 </div>
               )}
-            </div>
-          )}
-
-          {activeSection === "delete" && (
-            <div>
-              <h1>Delete Account</h1>
-              <p>We're sorry to see you go. Confirm account deletion here.</p>
-              {/* Add delete logic and confirmation modal here */}
             </div>
           )}
         </div>

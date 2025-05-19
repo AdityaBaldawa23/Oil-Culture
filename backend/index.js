@@ -4,13 +4,12 @@ const port = 5000;
 const mongoDB = require("./db");
 const sendOrderEmail = require("./EmailService")
 const cors = require("cors");
+const API_BASE = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 mongoDB();
 
-const fooditems = require('./routes/fooditemsRoute');
-app.use('/api', fooditems);
 
 const foodCategories = require('./routes/foodCategoryRoute');
 app.use('/api', foodCategories);
@@ -24,12 +23,19 @@ app.use('/api', OrderDetails);
 const FetchUsers = require("./routes/fetchUser");
 app.use('/profile', FetchUsers);
 
-
+const updatelastorder = require("./routes/orderdata");
+app.use('/api', updatelastorder);
 
 //Admin Handling Routes
 
 const ProductManagementRoutes = require("./routes/StockManagementRoute");
 app.use('/admin/product', ProductManagementRoutes);
+
+const Process = require("./routes/orderdata");
+app.use('/api', Process);
+
+const AdminOrders = require("./routes/AdminOrderRoute");
+app.use('/admin', AdminOrders);
 
 app.use('/uploads', express.static('uploads'));
 
@@ -54,6 +60,6 @@ app.post('/place-order', (req, res) => {
   res.status(200).send({ message: 'Order placed successfully, email sent!' });
 });
 
-app.listen(port, () =>{
-    console.log(`Example app listening on port ${port}`)
+app.listen(port, '0.0.0.0', () =>{
+    console.log(`Example app listening on all ports`)
 })

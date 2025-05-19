@@ -97,30 +97,6 @@ export default function LandingPage() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-
-          <div>
-            <button
-              style={{
-                padding: "12px 28px",
-                background: "linear-gradient(45deg, #8e44ad, #6c5ce7)",
-                color: "white",
-                border: "none",
-                borderRadius: "8px",
-                fontSize: "1.1rem",
-                fontWeight: "600",
-                cursor: "pointer",
-                marginRight: "16px",
-                boxShadow: "0 4px 15px rgba(108, 92, 231, 0.4)",
-                transition: "transform 0.2s ease",
-              }}
-              onMouseOver={(e) =>
-                (e.target.style.transform = "translateY(-3px)")
-              }
-              onMouseOut={(e) => (e.target.style.transform = "translateY(0)")}
-            >
-              Order Now
-            </button>
-          </div>
         </div>
       </div>
 
@@ -142,7 +118,7 @@ export default function LandingPage() {
             );
 
             return (
-              <div key={category._id} className="mb-5">
+              <div key={category._id} id={category.CategoryName.toLowerCase().replace(/[^a-z0-9]/gi, '')} className="mb-5">
                 <h1 className="section-heading">{category.CategoryName}</h1>
 
                 <div className="row g-4">

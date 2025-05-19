@@ -23,7 +23,7 @@ Order ID: ${order.id}
 Total: ₹${order.total}
 Items: ${itemsList}
 
-- The Aam Story
+- Rama Mangoes
     `,
   };
 

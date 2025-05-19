@@ -18,6 +18,21 @@
       0
     );
 
+    const userEmail = localStorage.getItem("userEmail");
+
+  // If user is not logged in
+  if (!userEmail) {
+    return (
+      <div className="mb-5 mt-5 w-100 text-center fs-3 text-danger">
+        ⚠️ You must be logged in to use the cart.
+        <br />
+        <a href="/login" style={{ textDecoration: "underline", color: "blue" }}>
+          Click here to Login
+        </a>
+      </div>
+    );
+  }
+
     if (data.length === 0) {
       return (
         <>
@@ -94,7 +109,6 @@
       }
     };
 
-    console.log(data);
 
     return (
       <>
