@@ -5,47 +5,68 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* Ensure it appears above other content */
+  z-index: 1000;
+  padding: 1rem; /* Add padding to prevent edge overflow */
+  box-sizing: border-box;
 }
 
 /* Modal Content */
 .modal-content {
   background: white;
-  padding: 2rem;
-  width: 90%;
+  padding: 1rem;
+  width: 100%;
   max-width: 650px;
   position: relative;
-  border-radius: 8px; /* Optional: adds rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  max-height: 90vh; /* Prevent overflow */
+  box-sizing: border-box;
 }
 
 /* Close Button */
 .btn-close {
   position: absolute;
-  top: 0.5rem; /* Adjusted top position for centering */
-  right: 0.5rem; /* Adjusted right position for centering */
-  background: red; /* Full red background */
+  top: 0.5rem;
+  right: 0.5rem;
+  background: red;
   border: none;
-  border-radius: 50%; /* Makes the button round */
-  width: 35px; /* Size of the button */
-  height: 35px; /* Size of the button */
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: white; /* White color for the 'X' */
+  font-size: 1.25rem;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth background color transition */
+  transition: background-color 0.3s ease;
 }
 
 .btn-close:hover {
-  background-color: #ff0000; /* Darker red on hover */
+  background-color: #cc0000;
 }
 
 .btn-close:focus {
-  outline: none; /* Removes focus outline */
+  outline: none;
+}
+
+/* 🔁 Responsive tweaks */
+@media screen and (max-width: 480px) {
+  .modal-content {
+    padding: 0.75rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 95%;
+  }
+
+  .btn-close {
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+  }
 }

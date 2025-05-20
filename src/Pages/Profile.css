@@ -280,3 +280,90 @@ body {
   padding: 6px 12px;
   cursor: pointer;
 }
+
+
+/* Sidebar wrapper to hold toggle and sidebar */
+.sidebar-wrapper {
+  position: relative;
+}
+
+/* Sidebar toggle button - hidden on desktop */
+.sidebar-toggle {
+  display: none;
+  background-color: #6d28d9;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px 20px;
+  width: calc(100% - 40px);
+  max-width: 240px;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+  background-color: #7c3aed;
+}
+
+/* Show toggle button on small screens */
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: block;
+  }
+
+  /* Sidebar styles for dropdown */
+  .sidebar {
+    position: absolute;
+    top: 48px; /* height of toggle + margin */
+    left: 20px;
+    right: 20px;
+    max-width: 240px;
+    background-color: rgba(0, 0, 0, 1);
+    padding: 15px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    z-index: 100;
+  }
+
+  /* When open, expand */
+  .sidebar.open {
+    max-height: 800px; /* enough to show all items */
+    opacity: 1;
+  }
+
+  /* Adjust sidebar contents for dropdown */
+  .sidebar h2 {
+    margin-bottom: 15px;
+    color: #a78bfa;
+    font-size: 18px;
+  }
+
+  .sidebar ul {
+    padding: 0;
+  }
+
+  .sidebar li {
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+  }
+}
+
+/* On wider screens, sidebar is static */
+@media (min-width: 769px) {
+  .sidebar {
+    position: relative !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+  }
+}
+

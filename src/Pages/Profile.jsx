@@ -20,13 +20,13 @@ const Profile = () => {
           return;
         }
 
-        const response = await axios.get("https://rama-mangoes.onrender.com/profile", {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         setUser(response.data);
-      } catch (error) {
+      } catch(error) {
         setError("Failed to fetch user data");
       }
     };
@@ -34,7 +34,7 @@ const Profile = () => {
     const fetchMyOrder = async () => {
       try {
         const email = localStorage.getItem("userEmail");
-        const res = await fetch("https://rama-mangoes.onrender.com/api/myOrderData", {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/myOrderData`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -58,33 +58,51 @@ const Profile = () => {
 
   const handleSave = () => {
     alert("Profile updated successfully!");
-    // Add POST/PUT request logic here
   };
+
+   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   const handleSectionClick = (section) => {
     setActiveSection(section);
+    setSidebarOpen(false);  
   };
 
   return (
     <>
       <Navbar />
       <div className="profile-container">
-        <div className="sidebar">
-          <h2>Hello, {user?.name || "Guest"}</h2>
-          <ul>
-            <li
-              onClick={() => handleSectionClick("profile")}
-              className={activeSection === "profile" ? "active" : ""}
-            >
-              👤 My Profile
-            </li>
-            <li
-              onClick={() => handleSectionClick("orders")}
-              className={activeSection === "orders" ? "active" : ""}
-            >
-              📦 Orders & Returns
-            </li>
-          </ul>
+        <div className="sidebar-wrapper">
+          <button
+            className="sidebar-toggle"
+            onClick={toggleSidebar}
+            aria-expanded={sidebarOpen}
+            aria-controls="sidebar-menu"
+          >
+            {sidebarOpen ? "✖ Close Menu" : "☰ Menu"}
+          </button>
+
+          <nav
+            id="sidebar-menu"
+            className={`sidebar ${sidebarOpen ? "open" : ""}`}
+          >
+            <h2>Hello, {user?.name || "Guest"}</h2>
+            <ul>
+              <li
+                onClick={() => handleSectionClick("profile")}
+                className={activeSection === "profile" ? "active" : ""}
+              >
+                👤 My Profile
+              </li>
+              <li
+                onClick={() => handleSectionClick("orders")}
+                className={activeSection === "orders" ? "active" : ""}
+              >
+                📦 Orders & Returns
+              </li>
+            </ul>
+          </nav>
         </div>
 
         <div className="content">

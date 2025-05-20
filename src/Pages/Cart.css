@@ -1,109 +1,228 @@
-.custom-modal {
-  background: #ffffff;
-  padding: 32px 28px;
-  border-radius: 20px;
-  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.15);
-  max-width: 480px;
-  width: 90%;
-  margin: auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #1a1a1a;
-  animation: fadeIn 0.35s ease-in-out;
-  box-sizing: border-box;
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #34495e;
+  --accent-color: #2980b9;
+  --background-color: #fdfdfd;
+  --text-color: #2c3e50;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.modal-header {
-  font-size: 24px;
-  margin-bottom: 24px;
+body {
+  background-color: var(--background-color);
+  font-family: var(--font-family);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+.cart-container {
+  max-width: 900px;
+  /* margin: 60px auto; */
+  /* padding: 0 20px; */
+}
+
+.cart-card {
+  background: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 40px 35px;
+  transition: box-shadow 0.3s ease;
+}
+
+.cart-card:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.cart-header {
+  font-size: 2.1rem;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  color: #212529;
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 35px;
+  letter-spacing: 1px;
 }
 
-.modal-label {
-  display: block;
-  margin-top: 18px;
-  font-weight: 600;
-  font-size: 15px;
-  color: #343a40;
-}
-
-.modal-input,
-.modal-textarea {
-  color: black;
+.cart-table {
   width: 100%;
-  padding: 12px 16px;
-  margin-top: 6px;
-  border: 1px solid #ced4da;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: bolder;
-  background-color: #f8f9fa;
-  transition: border-color 0.3s, background-color 0.3s;
-  box-sizing: border-box;
+  border-collapse: separate;
+  border-spacing: 0 18px;
+  font-size: 1rem;
 }
 
-.modal-input:focus,
-.modal-textarea:focus {
-  border-color: #0d6efd;
-  background-color: #ffffff;
-  outline: none;
-}
-
-.modal-textarea {
-  resize: vertical;
-  min-height: 90px;
-  max-height: 160px;
-}
-
-.modal-button {
-  margin-top: 30px;
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: #ffffff;
-  border: none;
-  border-radius: 50px;
+.cart-table thead th {
+  text-align: left;
+  padding-bottom: 12px;
   font-weight: 600;
-  font-size: 17px;
+  color: var(--secondary-color);
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.cart-table tbody tr {
+  background: #fafafa;
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease;
+}
+
+.cart-table tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+.cart-table td {
+  padding: 15px 15px;
+  vertical-align: middle;
+  color: var(--primary-color);
+}
+
+.cart-table td:first-child {
+  font-weight: 600;
+  width: 40px;
+}
+
+.cart-remove-btn {
+  background-color: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 8px 18px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.modal-button:hover {
-  background: linear-gradient(135deg, #0056b3, #004095);
-  transform: scale(1.02);
+.cart-remove-btn:hover {
+  background-color: var(--accent-color);
+  color: white;
 }
 
-@keyframes fadeIn {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
+.cart-total {
+  text-align: right;
+  margin-top: 30px;
+  font-weight: 700;
+  font-size: 1.9rem;
+  color: var(--primary-color);
+}
+
+.cart-checkout-btn {
+  display: block;
+  width: 100%;
+  margin: 40px 0 0;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 18px 0;
+  border-radius: var(--border-radius);
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cart-checkout-btn:hover {
+  background-color: #1f618d;
+  box-shadow: 0 8px 20px rgba(31, 97, 141, 0.6);
+}
+
+/* RESPONSIVE FIXES */
+
+/* Tablets & small desktops */
+@media (max-width: 768px) {
+  .cart-card {
+    padding: 30px 20px;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  .cart-header {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+
+  .cart-total {
+    font-size: 1.5rem;
+  }
+
+  .cart-checkout-btn {
+    padding: 16px 0;
+    font-size: 1.1rem;
   }
 }
 
-/* Responsive tweaks */
+/* Phones & very small devices */
 @media (max-width: 480px) {
-  .custom-modal {
-    padding: 24px 20px;
+  .cart-card {
+    padding: 25px 15px;
   }
 
-  .modal-header {
-    font-size: 20px;
+  .cart-header {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
   }
 
-  .modal-input,
-  .modal-textarea {
-    font-size: 14px;
+  /* Make table block layout */
+  .cart-table,
+  .cart-table thead,
+  .cart-table tbody,
+  .cart-table th,
+  .cart-table td,
+  .cart-table tr {
+    display: block;
+    width: 100%;
   }
 
-  .modal-button {
-    font-size: 15px;
-    padding: 11px;
+  .cart-table thead tr {
+    display: none; /* Hide headers */
   }
-}  
+
+  .cart-table tbody tr {
+    background: #fafafa;
+    margin-bottom: 20px;
+    padding: 15px 15px 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .cart-table tbody tr:hover {
+    background-color: #f9faff;
+  }
+
+  .cart-table td {
+    padding: 10px 10px 10px 120px;
+    position: relative;
+    text-align: left;
+    font-size: 1rem;
+    border-bottom: none;
+    color: var(--primary-color);
+  }
+
+  /* Labels inside the table cells */
+  .cart-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: var(--secondary-color);
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+
+  .cart-remove-btn {
+    padding: 7px 15px;
+    font-size: 0.85rem;
+  }
+
+  .cart-total {
+    font-size: 1.4rem;
+    margin-top: 25px;
+    text-align: center;
+  }
+
+  .cart-checkout-btn {
+    font-size: 1.1rem;
+    padding: 16px 0;
+    margin-top: 30px;
+  }
+}

@@ -91,41 +91,27 @@ router.post("/myOrderData", async (req, res) => {
   }
 });
 
-router.post("/processOrder", async (req, res) => {
+router.post("/update-order-status", async (req, res) => {
+  const { orderId, status } = req.body;
+
   try {
-    const { orderId } = req.body;
+    const updatedOrder = await Order.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    );
 
-    const order = await Order.findById(orderId);
-    if (!order) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Order not found" });
+    if (!updatedOrder) {
+      return res.status(404).json({ success: false, message: "Order not found" });
     }
 
-    if (order.status === "processed") {
-      return res
-        .status(400)
-        .json({ success: false, message: "Order already processed" });
-    }
-
-    // Combine items from all orders inside OrderData
-    let allItems = [];
-    for (const singleOrder of order.OrderData) {
-      if (singleOrder.items && Array.isArray(singleOrder.items)) {
-        allItems = allItems.concat(singleOrder.items);
-      }
-    }
-
-    // Mark the whole order as processed
-    order.status = "processed";
-    await order.save();
-
-    res.json({ success: true, message: "Order processed successfully" });
+    res.json({ success: true, message: "Order status updated", order: updatedOrder });
   } catch (error) {
-    console.error("Error in processOrder:", error);
-    res.status(500).json({ success: false, error: error.message });
+    console.error("Error updating order status:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
+
 
 router.post("/updateOrder", async (req, res) => {
   try {

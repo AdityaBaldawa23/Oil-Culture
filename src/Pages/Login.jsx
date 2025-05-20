@@ -12,7 +12,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://rama-mangoes.onrender.com/api/login/LoginUser", {
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/login/LoginUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,6 @@ export default function Login() {
     });
 
     const json = await response.json();
-    console.log(json);
 
     if (!json.success) {
       alert("Enter Valid Credentials");
@@ -33,7 +32,6 @@ export default function Login() {
       localStorage.setItem("userEmail", credentials.email);
       localStorage.setItem("authToken", json.authToken);
       localStorage.setItem("userRole", json.user.role);
-      console.log(localStorage.getItem("authToken"));
       if(json.user.role === 'admin')
       {
         navigate('/admin-manage');
