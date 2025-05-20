@@ -46,7 +46,7 @@ router.get("/display", async (req, res) => {
 
     // Add full URL to img field
     const host = req.get('host'); // e.g., localhost:5000
-    const protocol = req.protocol; // http or https
+    const protocol = 'https'; // http or https
 
     const productsWithFullImgURL = products.map(product => {
       const prodObj = product.toObject();
