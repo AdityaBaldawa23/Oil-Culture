@@ -2,16 +2,38 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../models/Orders");
 const Product = require("../models/MangoProduct");
-
 router.post("/orderdata", async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
   try {
-    let orderData = req.body.OrderData; // array of items per order
-    let orderDate = req.body.Order_Date; // string or date
-    let email = req.body.email;
-    let fullName = req.body.fullName;
-    let phone = req.body.phone;
-    let address = req.body.address;
-    let instructions = req.body.instructions || "";
+    const {
+      OrderData: orderData,
+      Order_Date: orderDate,
+      email,
+      fullName,
+      phone,
+      address,
+      instructions = "",
+    } = req.body;
+
+    // Check stock availability
+    for (const item of orderData) {
+      const product = await Product.findById(item.id).session(session);
+      if (!product) {
+        throw new Error(`Product ${item.id} not found`);
+      }
+      if (product.stock < item.quantity) {
+        throw new Error(`Insufficient stock for ${product.name}`);
+      }
+    }
+
+    // Deduct stock
+    for (const item of orderData) {
+      const product = await Product.findById(item.id).session(session);
+      product.stock -= item.quantity;
+      await product.save({ session });
+    }
 
     const newOrder = {
       Order_Date: orderDate,
@@ -19,19 +41,23 @@ router.post("/orderdata", async (req, res) => {
       status: "pending",
     };
 
-    let existingUser = await Order.findOne({ email });
+    let existingUser = await Order.findOne({ email }).session(session);
 
     if (!existingUser) {
-      // Create new user order document with details and first order
-      await Order.create({
-        email,
-        fullName,
-        phone,
-        address,
-        instructions,
-        OrderData: [newOrder],
-        Order_Date: orderDate,
-      });
+      await Order.create(
+        [
+          {
+            email,
+            fullName,
+            phone,
+            address,
+            instructions,
+            OrderData: [newOrder],
+            Order_Date: orderDate,
+          },
+        ],
+        { session }
+      );
     } else {
       await Order.findOneAndUpdate(
         { email },
@@ -40,18 +66,24 @@ router.post("/orderdata", async (req, res) => {
           ...(fullName && { fullName }),
           ...(phone && { phone }),
           ...(address && { address }),
-          instructions, // update even if empty string
+          instructions,
         },
-        { new: true }
+        { new: true, session }
       );
     }
 
+    await session.commitTransaction();
+    session.endSession();
+
     res.json({ success: true });
   } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
     console.error("Error in /orderdata route:", error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
 
 router.post("/myOrderData", async (req, res) => {
   try {
@@ -86,24 +118,6 @@ router.post("/processOrder", async (req, res) => {
       if (singleOrder.items && Array.isArray(singleOrder.items)) {
         allItems = allItems.concat(singleOrder.items);
       }
-    }
-
-    // Check stock availability for all items
-    for (const item of allItems) {
-      const product = await Product.findById(item.id);
-      if (!product) {
-        return res.status(404).json({ success: false, message: `Product ${item.id} not found` });
-      }
-      if (product.stock < item.quantity) {
-        return res.status(400).json({ success: false, message: `Insufficient stock for ${product.name}` });
-      }
-    }
-
-    // Deduct stock for all items
-    for (const item of allItems) {
-      const product = await Product.findById(item.id);
-      product.stock -= item.quantity;
-      await product.save();
     }
 
     // Mark the whole order as processed
