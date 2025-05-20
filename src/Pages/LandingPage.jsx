@@ -14,7 +14,7 @@ export default function LandingPage() {
   const loaditemData = async () => {
     setLoading(true);
     try {
-      let response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/admin/product/display`);
+      let response = await fetch(`https://rama-mangoes.onrender.com/admin/product/display`);
       response = await response.json();
       setFoodItem(response);
     } catch (error) {
@@ -26,7 +26,7 @@ export default function LandingPage() {
 
   const loadCatData = async () => {
     try {
-      let response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/food-category`);
+      let response = await fetch(`https://rama-mangoes.onrender.com/api/food-category`);
       response = await response.json();
       setFoodCat(response);
     } catch (error) {

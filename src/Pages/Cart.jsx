@@ -68,7 +68,7 @@ export default function Cart() {
 
     try {
       const res1 = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/orderdata`,
+        `https://rama-mangoes.onrender.com/api/orderdata`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ export default function Cart() {
       );
 
       const res2 = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/place-order`,
+        `https://rama-mangoes.onrender.com/place-order`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

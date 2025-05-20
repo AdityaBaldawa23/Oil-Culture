@@ -38,7 +38,7 @@ export default function ManageProduct() {
   const fetchProducts = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/admin/product/display`
+        `https://rama-mangoes.onrender.com/admin/product/display`
       );
       setProducts(res.data);
       setShowViewModal(true);
@@ -50,7 +50,7 @@ export default function ManageProduct() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API_BASE_URL}/admin/all-orders`
+        `https://rama-mangoes.onrender.com/admin/all-orders`
       );
       console.log("Orders API response:", res.data);
       setOrders(res.data.data);
@@ -63,7 +63,7 @@ export default function ManageProduct() {
     try {
       // Call backend API to update order status
       const response = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/api/update-order-status`,
+        `https://rama-mangoes.onrender.com/api/update-order-status`,
         { orderId, status: newStatus }
       );
 
@@ -98,7 +98,7 @@ export default function ManageProduct() {
 
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}/admin/product/update/${selectedProductId}`,
+        `https://rama-mangoes.onrender.com/admin/product/update/${selectedProductId}`,
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -125,7 +125,7 @@ export default function ManageProduct() {
 
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_BASE_URL}/admin/product/delete/${id}`
+        `https://rama-mangoes.onrender.com/admin/product/delete/${id}`
       );
       alert("Product deleted.");
       fetchProducts();
@@ -150,7 +150,7 @@ export default function ManageProduct() {
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/admin/product/add`,
+        `https://rama-mangoes.onrender.com/admin/product/add`,
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
