@@ -9,8 +9,6 @@ export default function ManageProduct() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [activeOrderTab, setActiveOrderTab] = useState("pending");
-  const [loadingOrders, setLoadingOrders] = useState(false);
-  const [orderError, setOrderError] = useState(null);
   const [showOrdersModal, setShowOrdersModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [formData, setFormData] = useState({

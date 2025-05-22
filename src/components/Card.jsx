@@ -64,7 +64,7 @@ export default function Card({ item }) {
           style={{
             width: "100%",
             height: "100%",
-            objectFit: "cover",
+            objectFit: "contain",
             transition: "transform 0.5s ease",
             transform: hover ? "scale(1.05)" : "scale(1)",
           }}
@@ -146,7 +146,18 @@ export default function Card({ item }) {
             ₹{item.price * quantity}
           </div>
         </div>
-
+        
+        <h6
+          style={{
+            fontWeight: "300",
+            fontSize: "1rem",
+            marginBottom: "8px",
+            color: "red",
+          }}
+        >
+          Only <span style={{fontWeight: "900", fontSize:"1.3rem"}}>{item.stock}</span> left !!
+        </h6>
+        
         <button
           disabled={!isLoggedIn}
           onClick={(e) => {

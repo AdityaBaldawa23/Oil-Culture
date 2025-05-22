@@ -171,12 +171,20 @@ export default function Cart() {
           />
 
           <label className="modal-label">Delivery Address</label>
-          <textarea
-            className="modal-textarea"
+          <select
+            className="modal-select"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-          />
+          >
+            <option value="" disabled>Select Delivery Address</option>
+            <option value="Sangli">Sangli</option>
+            <option value="Pune">Pune</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Parli">Parli</option>
+            <option value="Parbhani">Parbhani</option>
+            <option value="Hyderabad">Hyderabad</option>
+          </select>
 
           <label className="modal-label">Special Instructions</label>
           <textarea
