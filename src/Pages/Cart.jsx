@@ -64,6 +64,7 @@ export default function Cart() {
       id: `ORD-${Date.now()}`,
       total: totalPrice,
       items: data,
+      address: address
     };
 
     try {

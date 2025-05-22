@@ -30,7 +30,7 @@ Your order has been confirmed and is being prepared with love.
 ${itemsList}
 
 📍 Delivery Address: ${order.address}
-📞 Phone: ${order.phone}
+📞 Phone: 9423035733
 
 We'll notify you when it's on the way!
 
