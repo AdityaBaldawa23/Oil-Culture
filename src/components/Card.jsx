@@ -9,7 +9,9 @@ export default function Card({ item }) {
   const [quantity, setQuantity] = useState(1);
 
   const userEmail = localStorage.getItem("userEmail");
-  const isLoggedIn = Boolean(userEmail);
+  const authToken = localStorage.getItem("authToken");
+  const isLoggedIn = Boolean(authToken);
+
   const HandleAddToCart = async () => {
     if (!isLoggedIn) {
       alert("Please log in to add items to your cart.");
@@ -148,7 +150,7 @@ export default function Card({ item }) {
             ₹{item.price * quantity}
           </div>
         </div>
-        
+
         <h6
           style={{
             fontWeight: "300",
@@ -157,41 +159,36 @@ export default function Card({ item }) {
             color: "red",
           }}
         >
-          Only <span style={{fontWeight: "900", fontSize:"1.3rem"}}>{item.stock}</span> left !!
+          Only{" "}
+          <span style={{ fontWeight: "900", fontSize: "1.3rem" }}>
+            {item.stock}
+          </span>{" "}
+          left !!
         </h6>
-        
-        <button
-          disabled={!isLoggedIn}
-          onClick={(e) => {
-            if (!isLoggedIn) {
-              e.preventDefault();
-              alert("Please log in to add items to your cart.");
-              return;
-            }
-            HandleAddToCart();
-          }}
-          style={{
-            width: "100%",
-            padding: "10px",
-            border: "none",
-            borderRadius: "8px",
-            background: !isLoggedIn
-              ? "gray"
-              : hover
-              ? "linear-gradient(135deg, #ff6b00, #ff3d00)"
-              : "linear-gradient(45deg, #ff6b00, #ff3d00)",
-            color: "white",
-            fontWeight: "600",
-            cursor: !isLoggedIn ? "not-allowed" : "pointer",
-            opacity: !isLoggedIn ? 0.6 : 1,
-            transition: "all 0.3s ease",
-            boxShadow: hover
-              ? "0 5px 15px rgba(108, 92, 231, 0.4)"
-              : "0 2px 10px rgba(108, 92, 231, 0.2)",
-          }}
-        >
-          {isLoggedIn ? "Add to Cart" : "Login to Add"}
-        </button>
+
+        {isLoggedIn && (
+          <button
+            onClick={HandleAddToCart}
+            style={{
+              width: "100%",
+              padding: "10px",
+              border: "none",
+              borderRadius: "8px",
+              background: hover
+                ? "linear-gradient(135deg, #ff6b00, #ff3d00)"
+                : "linear-gradient(45deg, #ff6b00, #ff3d00)",
+              color: "white",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              boxShadow: hover
+                ? "0 5px 15px rgba(108, 92, 231, 0.4)"
+                : "0 2px 10px rgba(108, 92, 231, 0.2)",
+            }}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
     </div>
   );

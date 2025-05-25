@@ -91,7 +91,7 @@ export default function LandingPage() {
           <div style={{ marginBottom: "24px" }}>
             <input
               type="search"
-              placeholder="Search dishes or cuisines..."
+              placeholder="Search Variates...."
               style={{
                 padding: "12px 20px",
                 borderRadius: "8px",
