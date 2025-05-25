@@ -3,18 +3,20 @@ import Navbar from "../components/Navbar";
 import Card from "../components/Card.jsx";
 import Footer from "../components/Footer";
 import "./LandingPage.css";
-import MangoFarm from '../assets/MangoFarm.jpg'
+import MangoFarm from "../assets/MangoFarm.jpg";
 
 export default function LandingPage() {
   const [FoodCat, setFoodCat] = useState([]);
   const [FoodItem, setFoodItem] = useState([]);
-  const [search, setSearch] = useState(""); 
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
   const loaditemData = async () => {
     setLoading(true);
     try {
-      let response = await fetch(`https://rama-mangoes.onrender.com/admin/product/display`);
+      let response = await fetch(
+        `https://rama-mangoes.onrender.com/admin/product/display`
+      );
       response = await response.json();
       setFoodItem(response);
     } catch (error) {
@@ -26,7 +28,9 @@ export default function LandingPage() {
 
   const loadCatData = async () => {
     try {
-      let response = await fetch(`https://rama-mangoes.onrender.com/api/food-category`);
+      let response = await fetch(
+        `https://rama-mangoes.onrender.com/api/food-category`
+      );
       response = await response.json();
       setFoodCat(response);
     } catch (error) {
@@ -45,11 +49,14 @@ export default function LandingPage() {
 
       <div
         style={{
-          backgroundImage:
-            `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url(${MangoFarm})`,
+          position: "absolute",
+          width: "100%",
+          top: 0,
+          zIndex: 10,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url(${MangoFarm})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "70vh",
+          height: "80vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -66,7 +73,7 @@ export default function LandingPage() {
               marginBottom: "16px",
             }}
           >
-            Exquisite Flavors Delivered
+            Mangoes Made Magical
           </h1>
           <p
             style={{
@@ -76,8 +83,9 @@ export default function LandingPage() {
               opacity: 0.9,
             }}
           >
-            Discover authentic cuisines prepared with passion and delivered to
-            your doorstep
+            Indulge in the pure taste of orchard-fresh mangoes, carefully
+            handpicked at peak ripeness and delivered with love straight to your
+            doorstep.
           </p>
 
           <div style={{ marginBottom: "24px" }}>
@@ -100,7 +108,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="container py-5">
+      <div className="container py-5" style={{marginTop: "70vh"}}>
         {loading ? (
           <div className="text-center">Loading...</div>
         ) : FoodCat.length > 0 ? (
@@ -118,7 +126,14 @@ export default function LandingPage() {
             );
 
             return (
-              <div key={category._id} id={category.CategoryName.toLowerCase().replace(/[^a-z0-9]/gi, '')} className="mb-5">
+              <div
+                key={category._id}
+                id={category.CategoryName.toLowerCase().replace(
+                  /[^a-z0-9]/gi,
+                  ""
+                )}
+                className="mb-5"
+              >
                 <h1 className="section-heading">{category.CategoryName}</h1>
 
                 <div className="row g-4">

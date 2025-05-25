@@ -34,6 +34,7 @@ export default function Navbar() {
           <Link to="/" className="logo">
             Rama Mangoes
           </Link>
+          
 
           <div className={`nav-links ${menuopen ? "open" : ""}`}>
             <Link className={isActive("/") ? "active" : ""} to="/">
@@ -87,13 +88,13 @@ export default function Navbar() {
               </>
             )}
           </div>
-          
-            <button
-              className="menu-toggle"
-              onClick={() => setmenuopen((prev) => !prev)}
-            >
-              ☰
-            </button>
+
+          <button
+            className="menu-toggle"
+            onClick={() => setmenuopen((prev) => !prev)}
+          >
+            ☰
+          </button>
         </div>
       </nav>
       <Modal isOpen={ViewCart} onClose={() => setViewCart(false)}>

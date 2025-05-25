@@ -6,6 +6,7 @@ import "./Cart.css";
 export default function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fullName, setFullName] = useState("");
+  const [Loading, setLoading] = useState(false);
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [instructions, setInstructions] = useState("");
@@ -48,6 +49,8 @@ export default function Cart() {
       return;
     }
 
+    setLoading(true);
+
     const orderDetails = {
       email: userEmail,
       OrderData: data,
@@ -64,7 +67,7 @@ export default function Cart() {
       id: `ORD-${Date.now()}`,
       total: totalPrice,
       items: data,
-      address: address
+      address: address,
     };
 
     try {
@@ -171,14 +174,19 @@ export default function Cart() {
             required
           />
 
-          <label className="modal-label">Delivery Address</label>
+          <label className="modal-label">
+            Delivery Address(Outside Sangli orders minimum requirement of 5
+            dozen)
+          </label>
           <select
             className="modal-select"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           >
-            <option value="" disabled>Select Delivery Address</option>
+            <option value="" disabled>
+              Select Delivery Address
+            </option>
             <option value="Sangli">Sangli</option>
             <option value="Pune">Pune</option>
             <option value="Nagpur">Nagpur</option>
@@ -194,9 +202,20 @@ export default function Cart() {
             onChange={(e) => setInstructions(e.target.value)}
           />
 
-          <button className="modal-button" onClick={handleFinalSubmit}>
-            Submit Order 🚀
-          </button>
+          {Loading ? (
+            <div className="loader-overlay">
+              <div className="loader"></div>
+              <p
+                style={{ marginTop: "20px", fontSize: "1.2rem", color: "#555" }}
+              >
+                Placing your order...
+              </p>
+            </div>
+          ) : (
+            <button className="modal-button" onClick={handleFinalSubmit}>
+              Submit Order 🚀
+            </button>
+          )}
         </div>
       </Modal>
     </>

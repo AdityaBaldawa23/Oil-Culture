@@ -8,6 +8,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [ViewCart, setViewCart] = useState(false);
+    const [menuopen, setmenuopen] = useState(false);
 
   const location = useLocation();
 
@@ -59,6 +60,12 @@ export default function Navbar() {
             )}
           </div>
         </div>
+        <button
+            className="menu-toggle"
+            onClick={() => setmenuopen((prev) => !prev)}
+          >
+            ☰
+          </button>
       </nav>
       <Modal isOpen={ViewCart} onClose={() => setViewCart(false)}>
         <Cart />
