@@ -25,6 +25,7 @@ export default function Card({ item }) {
         price: item.price,
         quantity: quantity,
       });
+      alert("🛒 Cart updated!\n\nWe've adjusted the quantity for this item.");
     } else {
       await dispatch({
         type: "ADD",
@@ -33,6 +34,7 @@ export default function Card({ item }) {
         price: item.price,
         quantity: quantity,
       });
+      alert("🎉 Added to Cart!\n\nYour item has been successfully added.");
     }
   };
 

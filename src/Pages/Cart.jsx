@@ -91,7 +91,8 @@ export default function Cart() {
 
       if (res1.ok && res2.ok) {
         dispatch({ type: "DROP" });
-        alert("Order placed successfully! Confirmation email sent.");
+      alert("🎉 Thank you for your order!\n\nYour order has been placed successfully, and a confirmation email has been sent to your inbox.\n\nWe appreciate your support!");
+
         setIsModalOpen(false);
         setFullName("");
         setPhone("");
