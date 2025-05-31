@@ -45,7 +45,7 @@ export default function ManageProduct() {
   const fetchProducts = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/admin/product/display`
+        `https://oil-culture.onrender.com/admin/product/display`
       );
       setProducts(res.data);
       setShowViewModal(true);
@@ -57,7 +57,7 @@ export default function ManageProduct() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/admin/all-orders`
+        `https://oil-culture.onrender.com/admin/all-orders`
       );
       console.log("Orders API response:", res.data);
       setOrders(res.data.data);
@@ -70,7 +70,7 @@ export default function ManageProduct() {
     try {
       // Call backend API to update order status
       const response = await axios.post(
-        `http://localhost:5000/api/update-order-status`,
+        `https://oil-culture.onrender.com/api/update-order-status`,
         { orderId, orderStatus: newStatus }
       );
 
@@ -128,7 +128,7 @@ export default function ManageProduct() {
 
     try {
       await axios.put(
-        `http://localhost:5000/admin/product/update/${selectedProductId}`,
+        `https://oil-culture.onrender.com/admin/product/update/${selectedProductId}`,
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -156,7 +156,7 @@ export default function ManageProduct() {
 
     try {
       await axios.delete(
-        `http://localhost:5000/admin/product/delete/${id}`
+        `https://oil-culture.onrender.com/admin/product/delete/${id}`
       );
       alert("Product deleted.");
       fetchProducts();
@@ -195,7 +195,7 @@ export default function ManageProduct() {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/admin/product/add`,
+        `https://oil-culture.onrender.com/admin/product/add`,
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },

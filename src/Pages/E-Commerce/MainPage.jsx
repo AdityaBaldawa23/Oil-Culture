@@ -75,13 +75,13 @@ const MainPage = () => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/admin/product/display')
+        axios.get('https://oil-culture.onrender.com/admin/product/display')
             .then(response => settopProduct(response.data))
             .catch(error => console.log(`Error fetching products`, error))
     }, []);
     console.log(topProduct.productImages);
 
-    const IMAGE_BASE_URL = "http://localhost:5000/uploads/";
+    const IMAGE_BASE_URL = "https://oil-culture.onrender.com/uploads/";
 
     return (
         <>
@@ -153,7 +153,7 @@ const MainPage = () => {
                     <div className="product-list-scroll">
                         {topProduct.map((product) => {
                             const imageUrl = product.productImages && product.productImages.length > 0
-                                ? `http://localhost:5000/uploads/${product.productImages[0]}`
+                                ? `https://oil-culture.onrender.com/uploads/${product.productImages[0]}`
                                 : "fallback.jpg";
 
                             return (

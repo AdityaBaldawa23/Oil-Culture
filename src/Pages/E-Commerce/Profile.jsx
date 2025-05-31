@@ -20,7 +20,7 @@ const Profile = () => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:5000/profile`, {
+        const response = await axios.get(`https://oil-culture.onrender.com/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -34,7 +34,7 @@ const Profile = () => {
     const fetchMyOrder = async () => {
       try {
         const customerEmail = localStorage.getItem("userEmail");
-        const res = await fetch(`http://localhost:5000/api/myOrderData`, {
+        const res = await fetch(`https://oil-culture.onrender.com/api/myOrderData`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

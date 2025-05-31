@@ -13,7 +13,7 @@ const NewLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:5000/api/login/LoginUser`, {
+    const response = await fetch(`https://oil-culture.onrender.com/api/login/LoginUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

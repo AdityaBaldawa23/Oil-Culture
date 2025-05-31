@@ -15,7 +15,7 @@ export default function LandingPage() {
     setLoading(true);
     try {
       let response = await fetch(
-        `http://localhost:5000/admin/product/display`
+        `https://oil-culture.onrender.com/admin/product/display`
       );
       response = await response.json();
       setFoodItem(response);
@@ -29,7 +29,7 @@ export default function LandingPage() {
   const loadCatData = async () => {
     try {
       let response = await fetch(
-        `http://localhost:5000/api/food-category`
+        `https://oil-culture.onrender.com/api/food-category`
       );
       response = await response.json();
       setFoodCat(response);

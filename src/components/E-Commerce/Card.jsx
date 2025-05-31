@@ -51,7 +51,7 @@ export default function Card({ item }) {
   };
 
   const hasDiscount = item.originalPrice && item.originalPrice > item.productPrice;
-  const IMAGE_BASE_URL = "http://localhost:5000/uploads/";
+  const IMAGE_BASE_URL = "https://oil-culture.onrender.com/uploads/";
 
   return (
     <div

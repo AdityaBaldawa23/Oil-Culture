@@ -26,7 +26,7 @@ const NewSignup = () => {
             return;
         }
 
-        const response = await fetch(`http://localhost:5000/api/login/CreateUser`, {
+        const response = await fetch(`https://oil-culture.onrender.com/api/login/CreateUser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

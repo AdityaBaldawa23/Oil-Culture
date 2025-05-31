@@ -83,7 +83,7 @@ export default function Cart() {
 
     try {
       const res1 = await fetch(
-        `http://localhost:5000/api/orderdata`,
+        `https://oil-culture.onrender.com/api/orderdata`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ export default function Cart() {
       );
 
       const res2 = await fetch(
-        `http://localhost:5000/place-order`,
+        `https://oil-culture.onrender.com/place-order`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
