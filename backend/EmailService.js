@@ -4,7 +4,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, 
+    pass: process.env.EMAIL_PASS,
   },
 });
 
@@ -13,49 +13,49 @@ function sendOrderEmail(order) {
     .map(item => `• ${item.name} x${item.quantity}`)
     .join("\n");
 
-  // User email
+  // Email to customer
   const userMailOptions = {
-    from: "Rama Mangoes 🍋 <adityabaldawa23@gmail.com>",
+    from: "Oil Culture 🌿 <adityabaldawa23@gmail.com>",
     to: order.customerEmail,
-    subject: `🎉 Thank You for Your Order #${order.id}!`,
+    subject: `🛍️ Thank You for Your Order #${order.id} – Oil Culture`,
     text: `
 Hi ${order.name},
 
-Thank you for choosing Rama Mangoes! 🥭
-Your order has been confirmed and is being prepared with love.
+Thank you for your order at **Oil Culture** – where tradition meets wellness. 🌿✨  
+Your premium oils are now being prepared for delivery.
 
-🧾 Order ID: ${order.id}
-💰 Total: ₹${order.total}
-📦 Items:
+🧾 Order ID: ${order.id}  
+💰 Total Amount: ₹${order.total}  
+📦 Items Ordered:  
 ${itemsList}
 
-📍 Delivery Address: ${order.address}
-📞 Phone: 9423035733
+📍 Shipping Address: ${order.address}  
+📞 Contact Number: ${order.phone}
 
-We'll notify you when it's on the way!
+We’ll send you a notification once your package is dispatched.
 
-Warm regards,  
-Team Rama Mangoes
+In wellness,  
+**Team Oil Culture**
     `.trim(),
   };
 
-  // Admin email
+  // Email to admin
   const adminMailOptions = {
-    from: "Order Bot <adityabaldawa23@gmail.com>",
-    to: "baldawamahesh01@gmail.com",
-    subject: `📦 New Order Received - #${order.id}`,
+    from: "Order Notification Bot <adityabaldawa23@gmail.com>",
+    to: "oilculture2023@gmail.com",
+    subject: `📥 New Order Received – #${order.id} | Oil Culture`,
     text: `
-New Order Received!
+📦 A new order has been placed on Oil Culture.
 
-👤 Name: ${order.name}
-📞 Phone: ${order.phone}
-✉️ Email: ${order.customerEmail}
+👤 Customer: ${order.name}  
+📞 Phone: ${order.phone}  
+✉️ Email: ${order.customerEmail}  
 📍 Address: ${order.address}
 
-Items:
+🛒 Items:  
 ${itemsList}
 
-💰 Total: ₹${order.total}
+💰 Total: ₹${order.total}  
 🆔 Order ID: ${order.id}
     `.trim(),
   };

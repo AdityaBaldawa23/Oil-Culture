@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/Orders');
-const Product = require('../models/MangoProduct'); // Seems unused, can be removed if not needed
 
 router.get("/all-orders", async (req, res) => {
     try {

@@ -1,38 +1,82 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require("mongoose");
 
-const OrderSchema = new Schema({
-    email: {
-        type: String,
-        required: true
-    },
-    fullName: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: String,
-        required: true
-    },
-    address: {
-        type: String,
-        required: true
-    },
-    instructions: {
-        type: String
-    },
-    OrderData: {
-        type: Array,
-        required: true
-    },
-    Order_Date: {
-        type: Date,
-        required: true
-    },
-    status: {
-        type: String,
-        default: "pending"
-    }
+const productSchema = new mongoose.Schema({
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
+
+  productName: {
+    type: String,
+    required: true,
+  },
+
+  quantity: {
+    type: Number,
+    required: true,
+  },
+
+  price: {
+    type: Number,
+    required: true,
+  },
+
+  productDiscount: {
+    type: Number,
+    default: 0,
+  },
 });
 
-module.exports = mongoose.model('Orders', OrderSchema);
+const orderSchema = new mongoose.Schema({
+  customerName: {
+    type: String,
+  },
+
+  customerEmail: {
+    type: String,
+    match: /.+\@.+\..+/,
+  },
+
+  customerPhone: {
+    type: String,
+    required: true,
+  },
+
+  productsBought: {
+    type: [productSchema],
+    required: true,
+  },
+
+  orderTotal: {
+    type: Number,
+  },
+
+  paymentType: {
+    type: String,
+    enum: ["Cash", "UPI", "Other"],
+    required: true,
+  },
+
+  orderStatus: {
+    type: String,
+    enum: ["pending", "delivered", "cancelled"],
+    default: "pending",
+  },
+
+  address: {
+    type: String,
+    required: true,
+  },
+
+  instructions: {
+    type: String,
+  },
+
+  orderDate: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+module.exports = mongoose.model("Order", orderSchema);

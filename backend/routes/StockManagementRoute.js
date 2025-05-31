@@ -2,33 +2,52 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const router = express.Router();
-const Product = require("../models/MangoProduct");
-
-
+const Product = require("../models/OilProductModel");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // ensure 'uploads/' exists
+    cb(null, "uploads/"); // ensure 'uploads/' exists
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
+    cb(null, Date.now() + "-" + file.originalname);
+  },
 });
 
-const upload = multer({storage})
+const upload = multer({ storage });
 
-
-router.post("/add", upload.single("img"), async (req, res) => {
+router.post("/add", upload.array("productImages", 5), async (req, res) => {
   try {
+    const {
+      productCategory,
+      productName,
+      productPrice,
+      productSize,
+      stock,
+      productDescription,
+      productDiscount,
+      originalPrice,
+      tags,
+      isNew,
+      isBestseller,
+    } = req.body;
+
     const productData = {
-      CategoryName: req.body.CategoryName,
-      name: req.body.name,
-      price: req.body.price,
-      piecesPerBox: req.body.piecesPerBox,
-      stock: req.body.stock,
-      description: req.body.description,
-      img: req.file ? req.file.filename : null, // image filename
+      productCategory,
+      productName,
+      productPrice,
+      productSize,
+      stock,
+      productDescription,
+      productDiscount: productDiscount || 0,
+      originalPrice,
+      tags: tags ? (Array.isArray(tags) ? tags : [tags]) : [],
+      isNew: isNew === "true",
+      isBestseller: isBestseller === "true",
+      productImages: req.files ? req.files.map((file) => file.filename) : [],
     };
+
+    // Auto-generate a unique productID (you can change this logic)
+    productData.productID = "PID" + Date.now();
 
     const product = new Product(productData);
     await product.save();
@@ -44,11 +63,10 @@ router.get("/display", async (req, res) => {
   try {
     const products = await Product.find({});
 
-    // Add full URL to img field
-    const host = req.get('host'); // e.g., localhost:5000
-    const protocol = 'https'; // http or https
+    const host = req.get("host"); 
+    const protocol = req.protocol; 
 
-    const productsWithFullImgURL = products.map(product => {
+    const productsWithFullImgURL = products.map((product) => {
       const prodObj = product.toObject();
       if (prodObj.img) {
         prodObj.img = `${protocol}://${host}/uploads/${prodObj.img}`;
@@ -63,38 +81,74 @@ router.get("/display", async (req, res) => {
   }
 });
 
+router.put(
+  "/update/:id",
+  upload.array("productImages", 5),
+  async (req, res) => {
+    try {
+      const {
+        productCategory,
+        productName,
+        productPrice,
+        productSize,
+        productRating,
+        reviewCount,
+        stock,
+        productDescription,
+        productDiscount,
+        originalPrice,
+        tags,
+        isNew,
+        isBestseller,
+        existingImages, // Add this field from frontend
+      } = req.body;
 
-router.put("/update/:id", upload.single("img"), async (req, res) => {
-  try {
-    const updateData = {
-      CategoryName: req.body.CategoryName,
-      name: req.body.name,
-      price: req.body.price,
-      piecesPerBox: req.body.piecesPerBox,
-      stock: req.body.stock,
-      description: req.body.description,
-    };
+      const updateData = {
+        productCategory,
+        productName,
+        productPrice,
+        productSize,
+        productRating,
+        reviewCount,
+        stock,
+        productDescription,
+        productDiscount: productDiscount || 0,
+        originalPrice,
+        tags: tags ? (Array.isArray(tags) ? tags : [tags]) : [],
+        isNew: isNew === "true" || isNew === true,
+        isBestseller: isBestseller === "true" || isBestseller === true,
+      };
 
-    // Only update image if a new file was uploaded
-    if (req.file) {
-      updateData.img = req.file.filename;
+      // ✅ Handle image logic
+      if (req.files && req.files.length > 0) {
+        updateData.productImages = req.files.map((file) => file.filename);
+      } else if (existingImages) {
+        updateData.productImages = JSON.parse(existingImages);
+      }
+
+      const updatedProduct = await Product.findByIdAndUpdate(
+        req.params.id,
+        updateData,
+        { new: true }
+      );
+
+      if (!updatedProduct) {
+        return res
+          .status(404)
+          .json({ success: false, error: "Product not found" });
+      }
+
+      res.json({
+        success: true,
+        message: "Product updated successfully",
+        product: updatedProduct,
+      });
+    } catch (error) {
+      console.error("Error in Updating product: ", error);
+      res.status(500).json({ success: false, error: "Internal Server Error" });
     }
-
-    const updated = await Product.findByIdAndUpdate(req.params.id, updateData, {
-      new: true,
-    });
-
-    res.json({
-      success: true,
-      message: "Product updated successfully",
-      updated,
-    });
-  } catch (error) {
-    console.log("Error in Updating product: ", error);
-    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
-});
-
+);
 
 router.delete("/delete/:id", async (req, res) => {
   try {
@@ -109,11 +163,13 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-
 router.get("/displayByID/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    if(!product) return res.status(400).json({success: false, message: "Product Not Found"});
+    if (!product)
+      return res
+        .status(400)
+        .json({ success: false, message: "Product Not Found" });
     res.json(product);
   } catch (error) {
     console.log("Error in displaying products: ", error);

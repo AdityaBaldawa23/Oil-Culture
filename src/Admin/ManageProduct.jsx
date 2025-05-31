@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ManageProduct.css";
-import AdminNavbar from "../components/AdminNavbar";
+import AdminNavbar from "../components/Admin-Billing/AdminNavbar";
 import axios from "axios";
 
 export default function ManageProduct() {
@@ -12,14 +12,22 @@ export default function ManageProduct() {
   const [showOrdersModal, setShowOrdersModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [formData, setFormData] = useState({
-    CategoryName: "",
-    name: "",
-    price: "",
-    piecesPerBox: "",
+    productCategory: "",
+    productName: "",
+    productPrice: "",
+    productSize: "",
     stock: "",
-    description: "",
-    img: null,
+    productDescription: "",
+    productImages: null,
+    productRating: "",
+    reviewCount: "",
+    tags: "",
+    isNew: true,
+    isBestseller: "",
+    originalPrice: "",
+    productDiscount: "",
   });
+
   const [selectedProductId, setSelectedProductId] = useState(null);
 
   const handleChange = (e) => {
@@ -27,16 +35,17 @@ export default function ManageProduct() {
     setFormData((prev) => ({
       ...prev,
       [name]:
-        name === "price" || name === "piecesPerBox" || name === "stock"
+        ["productPrice", "productSize", "stock", "reviewCount", "productRating", "originalPrice", "productDiscount"].includes(name)
           ? Number(value)
           : value,
     }));
   };
 
+
   const fetchProducts = async () => {
     try {
       const res = await axios.get(
-        `https://rama-mangoes.onrender.com/admin/product/display`
+        `http://localhost:5000/admin/product/display`
       );
       setProducts(res.data);
       setShowViewModal(true);
@@ -48,7 +57,7 @@ export default function ManageProduct() {
   const fetchOrders = async () => {
     try {
       const res = await axios.get(
-        `https://rama-mangoes.onrender.com/admin/all-orders`
+        `http://localhost:5000/admin/all-orders`
       );
       console.log("Orders API response:", res.data);
       setOrders(res.data.data);
@@ -61,15 +70,15 @@ export default function ManageProduct() {
     try {
       // Call backend API to update order status
       const response = await axios.post(
-        `https://rama-mangoes.onrender.com/api/update-order-status`,
-        { orderId, status: newStatus }
+        `http://localhost:5000/api/update-order-status`,
+        { orderId, orderStatus: newStatus }
       );
 
       if (response.data.success) {
         // Update local state only if API call was successful
         setOrders((prevOrders) =>
           prevOrders.map((order) =>
-            order._id === orderId ? { ...order, status: newStatus } : order
+            order._id === orderId ? { ...order, orderStatus: newStatus } : order
           )
         );
       } else {
@@ -85,18 +94,41 @@ export default function ManageProduct() {
     e.preventDefault();
     const data = new FormData();
 
-    // Append fields
-    data.append("CategoryName", formData.CategoryName);
-    data.append("name", formData.name);
-    data.append("price", formData.price);
-    data.append("piecesPerBox", formData.piecesPerBox);
+    // Append all fields
+    data.append("productCategory", formData.productCategory);
+    data.append("productName", formData.productName);
+    data.append("productPrice", formData.productPrice);
+    data.append("productSize", formData.productSize);
     data.append("stock", formData.stock);
-    data.append("description", formData.description);
-    if (formData.img) data.append("img", formData.img);
+    data.append("productDescription", formData.productDescription);
+    data.append("reviewCount", formData.reviewCount || 0);
+    data.append("productRating", formData.productRating);
+    data.append("tags", formData.tags);
+    data.append("isBestseller", formData.isBestseller);
+    data.append("originalPrice", formData.originalPrice);
+    data.append("productDiscount", formData.productDiscount || 0);
+    data.append("isNew", formData.isNew);
+
+    // ✅ If new images are selected, send them
+    if (
+      formData.productImages &&
+      Array.isArray(formData.productImages) &&
+      formData.productImages.length > 0 &&
+      formData.productImages[0] instanceof File
+    ) {
+      formData.productImages.forEach((file) => {
+        data.append("productImages", file);
+      });
+    } else {
+      // ✅ Send existing image filenames if no new ones selected
+      if (formData.productImages) {
+        data.append("existingImages", JSON.stringify(formData.productImages));
+      }
+    }
 
     try {
       await axios.put(
-        `https://rama-mangoes.onrender.com/admin/product/update/${selectedProductId}`,
+        `http://localhost:5000/admin/product/update/${selectedProductId}`,
         data,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -111,6 +143,7 @@ export default function ManageProduct() {
     resetForm();
   };
 
+
   const handleEdit = (prod) => {
     setFormData(prod);
     setSelectedProductId(prod._id);
@@ -123,7 +156,7 @@ export default function ManageProduct() {
 
     try {
       await axios.delete(
-        `https://rama-mangoes.onrender.com/admin/product/delete/${id}`
+        `http://localhost:5000/admin/product/delete/${id}`
       );
       alert("Product deleted.");
       fetchProducts();
@@ -133,22 +166,36 @@ export default function ManageProduct() {
     }
   };
 
+  const filteredOrders = orders.filter(
+    (order) => order.orderStatus === activeOrderTab
+  );
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
 
     // Append all fields
-    data.append("CategoryName", formData.CategoryName);
-    data.append("name", formData.name);
-    data.append("price", formData.price);
-    data.append("piecesPerBox", formData.piecesPerBox);
+    data.append("productCategory", formData.productCategory);
+    data.append("productName", formData.productName);
+    data.append("productPrice", formData.productPrice);
+    data.append("productSize", formData.productSize);
     data.append("stock", formData.stock);
-    data.append("description", formData.description);
-    data.append("img", formData.img); // File field
+    data.append("productDescription", formData.productDescription);
+    data.append("reviewCount", formData.reviewCount);
+    data.append("tags", formData.tags);
+    data.append("isBestseller", formData.isBestseller);
+    data.append("originalPrice", formData.originalPrice);
+    if (formData.productImages && formData.productImages.length > 0) {
+      formData.productImages.forEach((file) => {
+        data.append("productImages", file);
+      });
+    }
+
 
     try {
       const res = await axios.post(
-        `https://rama-mangoes.onrender.com/admin/product/add`,
+        `http://localhost:5000/admin/product/add`,
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -168,23 +215,30 @@ export default function ManageProduct() {
 
   const resetForm = () => {
     setFormData({
-      CategoryName: "",
-      name: "",
-      price: "",
-      piecesPerBox: "",
+      productCategory: "",
+      productName: "",
+      productPrice: "",
+      productSize: "",
       stock: "",
-      description: "",
-      img: null,
+      productDescription: "",
+      productImages: null,
+      productRating: "",
+      reviewCount: "",
+      tags: "",
+      isNew: true,
+      isBestseller: "",
+      originalPrice: ""
     });
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    const files = Array.from(e.target.files);
     setFormData((prev) => ({
       ...prev,
-      img: file,
+      productImages: files,
     }));
   };
+
 
   return (
     <>
@@ -214,50 +268,50 @@ export default function ManageProduct() {
               <h2>Add Product</h2>
               <form onSubmit={handleSubmit} className="modal-form">
                 <select
-                  name="CategoryName"
-                  value={formData.CategoryName}
+                  name="productCategory"
+                  value={formData.productCategory}
                   onChange={handleChange}
                   required
                 >
                   <option value="" disabled>
                     Choose the category
                   </option>
-                  <option value="Hapus/Alphonsa">Hapus</option>
-                  <option value="Bitka Hapus">Bitka Hapus</option>
-                  <option value="Payri">Payri</option>
-                  <option value="Kesar">Kesar</option>
+                  <option value="Cooking Oil">Cooking Oil</option>
+                  <option value="Hair Oil">Hair Oil</option>
+                  <option value="Massage Oil">Massage Oil</option>
                 </select>
 
                 <input
                   type="text"
-                  name="name"
+                  name="productName"
                   placeholder="Product Name"
-                  value={formData.name}
+                  value={formData.productName}
                   onChange={handleChange}
                   required
                 />
 
                 <input
                   type="file"
-                  name="image"
+                  name="productImages"
                   accept="image/*"
+                  multiple
                   onChange={handleFileChange}
                 />
 
                 <input
                   type="number"
-                  name="price"
+                  name="productPrice"
                   placeholder="Price"
-                  value={formData.price}
+                  value={formData.productPrice}
                   onChange={handleChange}
                   required
                 />
 
                 <input
                   type="number"
-                  name="piecesPerBox"
-                  placeholder="Number of Pieces Per Box"
-                  value={formData.piecesPerBox}
+                  name="productSize"
+                  placeholder="Size of packing in Litres"
+                  value={formData.productSize}
                   onChange={handleChange}
                   required
                 />
@@ -271,10 +325,64 @@ export default function ManageProduct() {
                   required
                 />
 
+                <input
+                  type="number"
+                  name="productDiscount"
+                  placeholder="Discount on Product"
+                  value={formData.productDiscount}
+                  onChange={handleChange}
+                />
+
+                <input
+                  type="number"
+                  name="productRating"
+                  placeholder="Rating of Product"
+                  value={formData.productRating}
+                  onChange={handleChange}
+                />
+
+                <input
+                  type="number"
+                  name="reviewCount"
+                  placeholder="Number of reviews"
+                  value={formData.reviewCount}
+                  onChange={handleChange}
+                />
+
+                <input
+                  type="text"
+                  name="tags"
+                  placeholder="Tags(eg: Eco-Friendly,Healthy...)"
+                  value={formData.tags}
+                  onChange={handleChange}
+                />
+
+                <select
+                  name="isBestseller"
+                  value={formData.isBestseller}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Is it a Bestseller??
+                  </option>
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
+
+                <input
+                  type="number"
+                  name="originalPrice"
+                  placeholder="Original Non Discounted Price"
+                  value={formData.originalPrice}
+                  onChange={handleChange}
+                  required
+                />
+
                 <textarea
-                  name="description"
+                  name="productDescription"
                   placeholder="Description"
-                  value={formData.description}
+                  value={formData.productDescription}
                   onChange={handleChange}
                 />
 
@@ -300,50 +408,70 @@ export default function ManageProduct() {
             <div className="update-product-modal">
               <h2>Update Product</h2>
               <form onSubmit={handleUpdate} className="modal-form">
+
+                <label htmlFor="productCategory">Category</label>
                 <select
-                  name="categoryName"
-                  value={formData.CategoryName}
+                  id="productCategory"
+                  name="productCategory"
+                  value={formData.productCategory}
                   onChange={handleChange}
                   required
                 >
                   <option value="" disabled>
                     Choose the category
                   </option>
-                  <option value="Category A">Category A</option>
-                  <option value="Category B">Category B</option>
-                  <option value="Category C">Category C</option>
-                  <option value="Category D">Category D</option>
+                  <option value="Cooking Oil">Cooking Oil</option>
+                  <option value="Hair Oil">Hair Oil</option>
+                  <option value="Massage Oil">Massage Oil</option>
                 </select>
 
+                <label htmlFor="productName">Product Name</label>
                 <input
                   type="text"
-                  name="name"
+                  id="productName"
+                  name="productName"
                   placeholder="Product Name"
-                  value={formData.name}
+                  value={formData.productName}
                   onChange={handleChange}
                   required
                 />
 
+                <label htmlFor="image">Product Image</label>
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  accept="image/*"
+                  multiple
+                  onChange={handleFileChange}
+                />
+
+                <label htmlFor="productPrice">Price</label>
                 <input
                   type="number"
-                  name="price"
+                  id="productPrice"
+                  name="productPrice"
                   placeholder="Price"
-                  value={formData.price}
+                  value={formData.productPrice}
                   onChange={handleChange}
                   required
                 />
 
+                <label htmlFor="productSize">Size of Packing (Litres)</label>
                 <input
                   type="number"
-                  name="piecesPerBox"
-                  placeholder="Number of Pieces Per Box"
-                  value={formData.piecesPerBox}
+                  id="productSize"
+                  name="productSize"
+                  placeholder="Size of packing in Litres"
+                  value={formData.productSize}
                   onChange={handleChange}
                   required
                 />
 
+                <label htmlFor="stock">Total Stock</label>
                 <input
                   type="number"
+                  id="stock"
                   name="stock"
                   placeholder="Total Stock"
                   value={formData.stock}
@@ -351,10 +479,81 @@ export default function ManageProduct() {
                   required
                 />
 
+                <label htmlFor="productDiscount">Discount on Product (%)</label>
+                <input
+                  type="number"
+                  id="productDiscount"
+                  name="productDiscount"
+                  placeholder="Discount on Product"
+                  value={formData.productDiscount}
+                  onChange={handleChange}
+                />
+
+                <label htmlFor="productRating">Rating</label>
+                <input
+                  type="number"
+                  id="productRating"
+                  name="productRating"
+                  placeholder="Rating of Product"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  value={formData.productRating}
+                  onChange={handleChange}
+                />
+
+                <label htmlFor="reviewCount">Number of Reviews</label>
+                <input
+                  type="number"
+                  id="reviewCount"
+                  name="reviewCount"
+                  placeholder="Number of Reviews"
+                  value={formData.reviewCount}
+                  onChange={handleChange}
+                />
+
+                <label htmlFor="tags">Tags</label>
+                <input
+                  type="text"
+                  id="tags"
+                  name="tags"
+                  placeholder="Tags (e.g., Eco-Friendly, Healthy...)"
+                  value={formData.tags}
+                  onChange={handleChange}
+                />
+
+                <label htmlFor="isBestseller">Is it a Bestseller?</label>
+                <select
+                  id="isBestseller"
+                  name="isBestseller"
+                  value={formData.isBestseller}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="" disabled>
+                    Select option
+                  </option>
+                  <option value="True">Yes</option>
+                  <option value="False">No</option>
+                </select>
+
+                <label htmlFor="originalPrice">Original Non-Discounted Price</label>
+                <input
+                  type="number"
+                  id="originalPrice"
+                  name="originalPrice"
+                  placeholder="Original Non Discounted Price"
+                  value={formData.originalPrice}
+                  onChange={handleChange}
+                  required
+                />
+
+                <label htmlFor="productDescription">Description</label>
                 <textarea
-                  name="description"
+                  id="productDescription"
+                  name="productDescription"
                   placeholder="Description"
-                  value={formData.description}
+                  value={formData.productDescription}
                   onChange={handleChange}
                 />
 
@@ -375,6 +574,7 @@ export default function ManageProduct() {
           </div>
         )}
 
+
         {showViewModal && (
           <div className="view-products-modal-overlay">
             <div className="view-products-modal">
@@ -388,21 +588,33 @@ export default function ManageProduct() {
               <div className="product-list">
                 {products.map((prod) => (
                   <div key={prod._id} className="product-item">
-                    <h3>{prod.name}</h3>
+                    <h3>{prod.productName}</h3>
                     <p>
-                      <strong>Category:</strong> {prod.CategoryName}
+                      <strong>Category:</strong> {prod.productCategory}
                     </p>
                     <p>
-                      <strong>Price:</strong> ₹{prod.price}
+                      <strong>Price:</strong> ₹{prod.productPrice}
+                    </p>
+                    <p>
+                      <strong>Discount:</strong> ₹{prod.productDiscount}
                     </p>
                     <p>
                       <strong>Stock:</strong> {prod.stock}
                     </p>
                     <p>
-                      <strong>Pieces/Box:</strong> {prod.piecesPerBox}
+                      <strong>Reviews:</strong> {prod.reviewCount}
+                    </p>
+                    <p>
+                      <strong>Rating:</strong> {prod.productRating}
+                    </p>
+                    <p>
+                      <strong>Litre/pack:</strong> {prod.productSize}
                     </p>
                     <p className="desc">
-                      <strong>Description:</strong> {prod.description}
+                      <strong>Description:</strong> {prod.productDescription}
+                    </p>
+                    <p>
+                      <strong>Tags:</strong> {prod.tags}
                     </p>
                     <div className="product-actions">
                       <button onClick={() => handleEdit(prod)}>✏️ Edit</button>
@@ -431,9 +643,8 @@ export default function ManageProduct() {
                 {["pending", "delivered", "cancelled"].map((tab) => (
                   <button
                     key={tab}
-                    className={`tab-btn ${
-                      activeOrderTab === tab ? "active" : ""
-                    }`}
+                    className={`tab-btn ${activeOrderTab === tab ? "active" : ""
+                      }`}
                     onClick={() => setActiveOrderTab(tab)}
                   >
                     {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -442,53 +653,44 @@ export default function ManageProduct() {
               </div>
 
               <div className="orders-list">
-                {orders.length === 0 ? (
-                  <p>No orders found.</p>
+                {filteredOrders.length === 0 ? (
+                  <p>No {activeOrderTab} orders found.</p>
                 ) : (
-                  orders
-                    .filter((order) => order.status === activeOrderTab)
-                    .map((order) => (
-                      <div key={order._id} className="order-item">
-                        <p>
-                          <strong>Order ID:</strong> {order._id}
-                        </p>
-                        <p>
-                          <strong>User:</strong> {order.fullName} ({order.email}
-                          )
-                        </p>
-                        <p>
-                          <strong>Phone:</strong> {order.phone}
-                        </p>
-                        <p>
-                          <strong>Address:</strong> {order.address}
-                        </p>
-                        <p>
-                          <strong>Status:</strong> <em>{order.status}</em>
-                        </p>
+                  filteredOrders.map((order) => (
+                    <div key={order._id} className="order-item">
+                      <p>
+                        <strong>Order ID:</strong> {order._id}
+                      </p>
+                      <p>
+                        <strong>User:</strong> {order.customerName} ({order.customerEmail})
+                      </p>
+                      <p>
+                        <strong>Phone:</strong> {order.customerPhone}
+                      </p>
+                      <p>
+                        <strong>Address:</strong> {order.address}
+                      </p>
+                      <p>
+                        <strong>Status:</strong> <em>{order.orderStatus}</em>
+                      </p>
 
-                        {/* Buttons to change status */}
-                        <div className="status-buttons">
-                          {["pending", "delivered", "cancelled"].map(
-                            (statusOption) => (
-                              <button
-                                key={statusOption}
-                                disabled={order.status === statusOption}
-                                onClick={() =>
-                                  handleChangeStatus(order._id, statusOption)
-                                }
-                                className={`status-btn status-btn-${statusOption} ${
-                                  order.status === statusOption ? "active" : ""
-                                }`}
-                                title={`Mark order as ${statusOption}`}
-                              >
-                                {statusOption.charAt(0).toUpperCase() +
-                                  statusOption.slice(1)}
-                              </button>
-                            )
-                          )}
-                        </div>
+                      {/* Buttons to change status */}
+                      <div className="status-buttons">
+                        {["pending", "delivered", "cancelled"].map((statusOption) => (
+                          <button
+                            key={statusOption}
+                            disabled={order.orderStatus === statusOption}
+                            onClick={() => handleChangeStatus(order._id, statusOption)}
+                            className={`status-btn status-btn-${statusOption} ${order.orderStatus === statusOption ? "active" : ""
+                              }`}
+                            title={`Mark order as ${statusOption}`}
+                          >
+                            {statusOption.charAt(0).toUpperCase() + statusOption.slice(1)}
+                          </button>
+                        ))}
                       </div>
-                    ))
+                    </div>
+                  ))
                 )}
               </div>
             </div>

@@ -85,6 +85,93 @@
 }
 
 /* Modal Overlays */
+/* Container */
+.container-product {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Grid Layout */
+.grid1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+/* Base Button Style */
+.btn1 {
+  height: 280px;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
+}
+
+.btn1:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn1:focus-visible {
+  outline: 3px solid #3333ff;
+  outline-offset: 3px;
+}
+
+/* Button Themes */
+.add {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+.add:hover {
+  background: linear-gradient(135deg, #3a8de0, #00c2d3);
+}
+
+.view {
+  background: linear-gradient(135deg, #ffd452, #ffb347);
+  color: #212529;
+}
+.view:hover {
+  background: linear-gradient(135deg, #e0a800, #cc923d);
+}
+
+.order {
+  background: linear-gradient(135deg, #00dbde, #fc00ff);
+  color: #000;
+}
+.order:hover {
+  background: linear-gradient(135deg, #00b8b9, #c600d8);
+}
+
+.update {
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+}
+.update:hover {
+  background: linear-gradient(135deg, #2bbd68, #25d6c9);
+}
+
+.delete {
+  background: linear-gradient(135deg, #f85032, #e73827);
+}
+.delete:hover {
+  background: linear-gradient(135deg, #cc2e2e, #a71919);
+}
+
+/* Modal Overlays */
 .manage-product-modal-overlay,
 .update-product-modal-overlay {
   position: fixed;
@@ -92,12 +179,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +188,7 @@
   backdrop-filter: blur(6px);
 }
 
-/* Modal Containers */
+/* Modal Containers - updated for scroll */
 .manage-product-modal,
 .update-product-modal {
   background: #ffffff;
@@ -114,12 +196,30 @@
   max-width: 440px;
   width: 90%;
   padding: 30px 32px;
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.15),
-    0 6px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 6px 12px rgba(0, 0, 0, 0.08);
   position: relative;
   animation: slideInModal 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f0f0f0;
+}
+
+/* Scrollbar styling for WebKit */
+.manage-product-modal::-webkit-scrollbar,
+.update-product-modal::-webkit-scrollbar {
+  width: 8px;
+}
+.manage-product-modal::-webkit-scrollbar-track,
+.update-product-modal::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+.manage-product-modal::-webkit-scrollbar-thumb,
+.update-product-modal::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 8px;
 }
 
 /* Modal Animations */
@@ -127,7 +227,6 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 @keyframes slideInModal {
   0% {
     opacity: 0;
@@ -181,9 +280,7 @@
 .update-product-modal input:focus,
 .update-product-modal textarea:focus {
   border-color: #007bff;
-  box-shadow:
-    0 0 12px rgba(0, 123, 255, 0.6),
-    inset 2px 2px 12px rgba(0, 123, 255, 0.2);
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.6), inset 2px 2px 12px rgba(0, 123, 255, 0.2);
   background: #fff;
   outline: none;
   color: #111;
@@ -205,38 +302,27 @@
   font-weight: 700;
   font-size: 1rem;
   border-radius: 14px;
-  box-shadow:
-    0 6px 18px rgba(33, 136, 56, 0.7),
-    0 2px 8px rgba(33, 136, 56, 0.5);
+  box-shadow: 0 6px 18px rgba(33, 136, 56, 0.7), 0 2px 8px rgba(33, 136, 56, 0.5);
   transition: background 0.35s ease, box-shadow 0.35s ease;
   user-select: none;
 }
-
 .btn.submit:hover {
   background: linear-gradient(135deg, #218838, #1c6c2e);
-  box-shadow:
-    0 10px 25px rgba(28, 108, 46, 0.85),
-    0 4px 12px rgba(28, 108, 46, 0.6);
+  box-shadow: 0 10px 25px rgba(28, 108, 46, 0.85), 0 4px 12px rgba(28, 108, 46, 0.6);
 }
-
 .btn.cancel {
   background: linear-gradient(135deg, #6c757d, #5a6268);
   padding: 14px 28px;
   font-weight: 700;
   font-size: 1rem;
   border-radius: 14px;
-  box-shadow:
-    0 6px 18px rgba(90, 98, 104, 0.7),
-    0 2px 8px rgba(90, 98, 104, 0.5);
+  box-shadow: 0 6px 18px rgba(90, 98, 104, 0.7), 0 2px 8px rgba(90, 98, 104, 0.5);
   transition: background 0.35s ease, box-shadow 0.35s ease;
   user-select: none;
 }
-
 .btn.cancel:hover {
   background: linear-gradient(135deg, #5a6268, #4b5257);
-  box-shadow:
-    0 10px 25px rgba(75, 82, 87, 0.85),
-    0 4px 12px rgba(75, 82, 87, 0.6);
+  box-shadow: 0 10px 25px rgba(75, 82, 87, 0.85), 0 4px 12px rgba(75, 82, 87, 0.6);
 }
 
 /* Smooth text selection prevention for buttons */
@@ -249,12 +335,17 @@
   .manage-product-modal,
   .update-product-modal {
     padding: 24px 20px;
+    max-height: 90vh;
+    overflow-y: auto;
   }
+
   .manage-product-modal h2,
   .update-product-modal h2 {
     font-size: 1.5rem;
   }
-  .btn.submit, .btn.cancel {
+
+  .btn.submit,
+  .btn.cancel {
     padding: 12px 22px;
     font-size: 0.9rem;
   }

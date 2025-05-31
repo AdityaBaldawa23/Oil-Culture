@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.terms-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  color: #fff;
+}
+
+.terms-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  color: #e0e0e0;
+}
+
+.terms-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 800;
+  color: #bb86fc;
+  margin-bottom: 30px;
+}
+
+.terms-intro {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #ddd;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #ff80ab;
+}
+
+.terms-section h2 {
+  color: #d1aaff;
+  font-size: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.terms-section p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.terms-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #999;
+}
