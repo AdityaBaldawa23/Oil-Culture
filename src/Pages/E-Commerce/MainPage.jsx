@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 import "./MainPage.css";
 import HomeImg from '../../assets/oilculture.png';
 import Navbar from "../../components/E-Commerce/Navbar";
-import oil from '../../assets/oil.jpg';
 import check from '../../assets/coldpresspurity.png'
 import natural from '../../assets/natural.png'
 import lab from '../../assets/lab.png'
 import local from '../../assets/local.jpg'
-// import groundnutImg from '../assets/Images/groundnut.png';
 import bannerImg from '../../assets/Banner1.jpg';
 import bannerImg2 from '../../assets/Banner2.jpg';
 import Footer from "../../components/E-Commerce/Footer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import I2 from '../../assets/2.jpg'
+import I7 from '../../assets/7.jpg'
+import I11 from '../../assets/11.jpg'
+import I36 from '../../assets/36.jpg'
+import I1 from '../../assets/1.jpg'
+import I3 from '../../assets/3.jpg'
+import I8 from '../../assets/8.jpg'
+import I14 from '../../assets/14.jpg'
+import I34 from '../../assets/34.jpg'
+
 
 const MainPage = () => {
     const [openFAQ, setOpenFAQ] = useState(null);
@@ -89,7 +97,7 @@ const MainPage = () => {
             <div className="landing">
                 <section
                     className="hero"
-                    style={{ backgroundImage: `url(${HomeImg})` }}
+                    style={{ backgroundImage: `url(${I2})` }}
                 >
                     <div className="hero-text">
                         <h1 className="hero-heading">
@@ -99,7 +107,7 @@ const MainPage = () => {
                             Handcrafted from nature's finest seeds and nuts, our oils are unrefined, chemical-free, and packed with wholesome goodness. From trusted local farms straight to your kitchen — embrace purity, tradition, and wellness in every drop.
                         </p>
                         <Link to='/shop'>
-                            <button className="explore-btn">🌿 Explore Our Products</button>
+                            <button className="explore-btn">🌿 Explore Our Oils</button>
                         </Link>
                     </div>
 
@@ -147,7 +155,7 @@ const MainPage = () => {
                         </div>
                     </div>
                 </section>
-
+                
                 <section className="top-products">
                     <h2 className="top-products-title">TOP PRODUCTS</h2>
                     <div className="product-list-scroll">
@@ -181,19 +189,19 @@ const MainPage = () => {
 
                 <section className="gallery-map-section">
                     <div className="gallery-half">
-                        <h2>Our Gallery</h2>
+                        <h2>Our Another Gallery</h2>
                         <Slider {...settings}>
                             <div>
-                                <img src={oil} alt="Gallery 1" />
+                                <img src={I11} alt="Gallery 1" />
                             </div>
                             <div>
-                                <img src={bannerImg} alt="Gallery 2" />
+                                <img src={I2} alt="Gallery 2" />
                             </div>
                             <div>
-                                <img src={bannerImg2} alt="Gallery 3" />
+                                <img src={I36} alt="Gallery 3" />
                             </div>
                             <div>
-                                <img src={HomeImg} alt="Gallery 4" />
+                                <img src={I7} alt="Gallery 4" />
                             </div>
                         </Slider>
                     </div>

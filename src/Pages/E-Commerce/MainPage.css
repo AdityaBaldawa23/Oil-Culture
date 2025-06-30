@@ -42,6 +42,7 @@ img {
   justify-content: flex-start;
   padding-left: 5%;
   position: relative;
+  overflow: hidden;
 }
 
 .hero::before {
@@ -51,48 +52,70 @@ img {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
   z-index: 0;
 }
 
 .hero-text {
-  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 2rem 2.5rem;
+  border-radius: 20px;
+  max-width: 640px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  color: white;
-  max-width: 600px;
-  padding: 2rem;
-  top: -75px;
+  position: relative;
+  color: rgb(7, 7, 7);
   text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.hero-text h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.hero-text h1 {
+  color: #020202;
+}
+
+.hero-text .highlight {
+  color: #f5c000; /* slightly softened gold */
 }
 
 .hero-text p {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+  color: black;
 }
+
 
 .explore-btn {
   background-color: #e6a300;
-  color: white;
+  color: #fff;
+  padding: 0.9rem 1.6rem;
+  font-weight: 600;
+  font-size: 1rem;
   border: none;
-  padding: 0.8rem 1.6rem;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .explore-btn:hover {
-  background-color: #c98f00;
+  background-color: #cc8e00;
+  transform: translateY(-2px);
 }
 
-.highlight {
-  color: #e6a300;
+/* Optional: subtle scroll animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 
 /* ===========================
    🖼️ Gallery & Map Section
