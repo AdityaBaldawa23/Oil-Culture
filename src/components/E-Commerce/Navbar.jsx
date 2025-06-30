@@ -1,10 +1,11 @@
-  import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { useCart } from "./ContextReducer";
 import Modal from "../../Modal";
 import Cart from "../../Pages/E-Commerce/Cart";
-import "./Navbar.css"; // import the new CSS
+import "./Navbar.css"; 
+import logo from '../../assets/logo.png'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,8 +34,10 @@ export default function Navbar() {
       <nav className={`navbar ${isScrolled ? "scrolled" : ""} ${isEcom ? "ecom" : ""} ${isPro ? "pro" : ""}`}>
         <div className="container">
           <Link to="/" className="logo">
-            Oil Culture
+            <img src={logo} alt="Oil Culture Logo" className="logo-img" />
+            {/* <span>Oil Culture</span> */}
           </Link>
+
 
 
           <div className={`nav-links ${menuopen ? "open" : ""}`}>
@@ -60,7 +63,7 @@ export default function Navbar() {
 
                 <Link
                   className={isActive("/profile") ? "active" : ""}
-                  to="/profile" 
+                  to="/profile"
                 >
                   Profile
                 </Link>

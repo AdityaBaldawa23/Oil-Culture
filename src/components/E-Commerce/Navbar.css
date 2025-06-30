@@ -12,7 +12,7 @@ nav.navbar {
 
 /* === SCROLLED STATE === */
 nav.navbar.scrolled {
-  background: #ffffff;
+  background: #f8f6f4;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -23,6 +23,11 @@ nav.navbar.scrolled {
   text-decoration: none;
   color: #ffa500;
   transition: color 0.3s ease;
+}
+
+.logo-img {
+  height: 80px;
+  width: auto;
 }
 
 nav.navbar.scrolled .logo {

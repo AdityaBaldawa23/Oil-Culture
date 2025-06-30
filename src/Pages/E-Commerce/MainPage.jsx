@@ -113,18 +113,28 @@ const MainPage = () => {
 
                 </section>
 
-                <section className="about-us">
-                    <h2>ABOUT US</h2>
-                    <div className="about-content">
-                        <p>
-                            Welcome to <strong>Oil Culture</strong> — where tradition meets wellness. We’re more than just an oil brand; we’re a movement toward mindful consumption and sustainable living. Born out of a deep respect for nature and age-old Indian wisdom, Oil Culture is committed to reviving the lost art of cold-pressing to bring you oils that are rich in flavor, nutrients, and authenticity.
-                            <br /><br />
-                            Our journey begins with the careful selection of high-quality, non-GMO seeds grown by dedicated farmers across India. We partner directly with local communities to ensure fair trade and traceability. These seeds are then cold-pressed using wooden churners (known as *Ghani* in traditional methods) to extract oil without generating heat or using chemicals, thus preserving their natural goodness.
-                            <br /><br />
-                            Every batch of oil we produce undergoes rigorous lab testing to ensure it is 100% pure, chemical-free, and safe for everyday use. From the heartiness of groundnut oil to the gentle essence of coconut, sesame, mustard, and sunflower oils, our products are crafted to enhance not just your food, but your lifestyle.
-                            <br /><br />
-                            At Oil Culture, our mission is clear — to offer you oils that support your health, respect the environment, and empower local farmers. By choosing us, you are choosing transparency, sustainability, and wellness in every drop.
-                        </p>
+                
+                <section className="top-products">
+                    <h2 className="top-products-title">TOP PRODUCTS</h2>
+                    <div className="product-list-scroll">
+                        {topProduct.map((product) => {
+                            const imageUrl = product.productImages && product.productImages.length > 0
+                                ? `https://oil-culture.onrender.com/uploads/${product.productImages[0]}`
+                                : "fallback.jpg";
+
+                            return (
+                                <div className="product-card" key={product._id}>
+                                    <img src={imageUrl} alt={product.productName} className="product-img" />
+                                    <div className="product-details">
+                                        <h3>{product.productName}</h3>
+                                        <p>{product.productSize} L</p>
+                                        <Link to="/shop">
+                                            <button className="buy-btn">Buy Now</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </section>
 
@@ -156,29 +166,6 @@ const MainPage = () => {
                     </div>
                 </section>
                 
-                <section className="top-products">
-                    <h2 className="top-products-title">TOP PRODUCTS</h2>
-                    <div className="product-list-scroll">
-                        {topProduct.map((product) => {
-                            const imageUrl = product.productImages && product.productImages.length > 0
-                                ? `https://oil-culture.onrender.com/uploads/${product.productImages[0]}`
-                                : "fallback.jpg";
-
-                            return (
-                                <div className="product-card" key={product._id}>
-                                    <img src={imageUrl} alt={product.productName} className="product-img" />
-                                    <div className="product-details">
-                                        <h3>{product.productName}</h3>
-                                        <p>{product.productSize} L</p>
-                                        <Link to="/shop">
-                                            <button className="buy-btn">Buy Now</button>
-                                        </Link>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </section>
 
 
                 <section className="our-process">
@@ -218,6 +205,21 @@ const MainPage = () => {
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
                         ></iframe>
+                    </div>
+                </section>
+
+                <section className="about-us">
+                    <h2>ABOUT US</h2>
+                    <div className="about-content">
+                        <p>
+                            Welcome to <strong>Oil Culture</strong> — where tradition meets wellness. We’re more than just an oil brand; we’re a movement toward mindful consumption and sustainable living. Born out of a deep respect for nature and age-old Indian wisdom, Oil Culture is committed to reviving the lost art of cold-pressing to bring you oils that are rich in flavor, nutrients, and authenticity.
+                            <br /><br />
+                            Our journey begins with the careful selection of high-quality, non-GMO seeds grown by dedicated farmers across India. We partner directly with local communities to ensure fair trade and traceability. These seeds are then cold-pressed using wooden churners (known as *Ghani* in traditional methods) to extract oil without generating heat or using chemicals, thus preserving their natural goodness.
+                            <br /><br />
+                            Every batch of oil we produce undergoes rigorous lab testing to ensure it is 100% pure, chemical-free, and safe for everyday use. From the heartiness of groundnut oil to the gentle essence of coconut, sesame, mustard, and sunflower oils, our products are crafted to enhance not just your food, but your lifestyle.
+                            <br /><br />
+                            At Oil Culture, our mission is clear — to offer you oils that support your health, respect the environment, and empower local farmers. By choosing us, you are choosing transparency, sustainability, and wellness in every drop.
+                        </p>
                     </div>
                 </section>
 
