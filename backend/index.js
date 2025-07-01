@@ -32,7 +32,6 @@ app.use("/admin/product", ProductManagementRoutes);
 const AdminOrders = require("./routes/AdminOrderRoute");
 app.use("/admin", AdminOrders);
 
-app.use("/uploads", express.static("uploads"));
 
 app.post("/place-order", (req, res) => {
   const order = req.body;
