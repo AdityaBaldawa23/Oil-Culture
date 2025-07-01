@@ -1,18 +1,8 @@
 const express = require("express");
 const multer = require("multer");
-const path = require("path");
 const router = express.Router();
 const Product = require("../models/OilProductModel");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/"); // ensure 'uploads/' exists
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-
+const { storage } = require("../config/cloudinaryConfig");
 const upload = multer({ storage });
 
 router.post("/add", upload.array("productImages", 5), async (req, res) => {
@@ -43,7 +33,7 @@ router.post("/add", upload.array("productImages", 5), async (req, res) => {
       tags: tags ? (Array.isArray(tags) ? tags : [tags]) : [],
       isNew: isNew === "true",
       isBestseller: isBestseller === "true",
-      productImages: req.files ? req.files.map((file) => file.filename) : [],
+      productImages: req.files ? req.files.map((file) => file.path) : [],
     };
 
     // Auto-generate a unique productID (you can change this logic)

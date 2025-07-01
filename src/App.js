@@ -10,6 +10,7 @@ import BillingForm from "./Pages/Billing/BillingForm";
 import TermsAndConditions from "./components/E-Commerce/TermsAndConditions";
 import MainPage from "./Pages/E-Commerce/MainPage";
 import EnhancedSignUp from "./Pages/E-Commerce/SignUpLatest";
+import ProductDetails from "./components/E-Commerce/ProductOpen";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/admin-manage" element={<ManageProduct />} />
             <Route path="/add-new-bill" element={<BillingForm />} />
             <Route path="/terms" element={<TermsAndConditions />} />
+            <Route path="/product" element={<ProductDetails />} />
           </Routes>
         </div>
       </BrowserRouter>

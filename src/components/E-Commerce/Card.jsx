@@ -60,7 +60,7 @@ export default function Card({ item }) {
       onMouseLeave={() => setHover(false)}
     >
       <div className="card-image">
-        <img src={`${IMAGE_BASE_URL}${item.productImages[0]}`} alt={item.productName} />
+        <img src={item.productImages[0]} alt={item.productName} />
         {item.isNew && <span className="badge new">New</span>}
         {item.isBestseller && <span className="badge bestseller">🔥 Bestseller</span>}
       </div>

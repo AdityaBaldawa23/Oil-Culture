@@ -1,0 +1,307 @@
+body {
+  background-color: #111;
+  color: #f5f5f5;
+  font-family: "Segoe UI", "Poppins", sans-serif;
+}
+
+.product-page .container1 {
+  max-width: 1200px;
+  margin: auto;
+  padding: 50px 20px;
+}
+
+.back-link {
+  color: #FFD700;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+.product-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  background: #1c1c1c;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+.product-left {
+  flex: 1;
+  min-width: 350px;
+}
+
+.product-right {
+  flex: 1;
+  min-width: 350px;
+}
+
+.main-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+.thumbnail-row {
+  margin-top: 15px;
+  display: flex;
+  gap: 12px;
+}
+
+.thumbnail {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  opacity: 0.6;
+  transition: 0.3s ease-in-out;
+}
+
+.thumbnail:hover,
+.active-thumb {
+  border-color: #FFD700;
+  opacity: 1;
+}
+
+.badge-row {
+  margin-bottom: 10px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-right: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.badge.new {
+  background: #262626;
+  color: #FFD700;
+  border: 1px solid #FFD700;
+}
+
+.badge.bestseller {
+  background: #FFD700;
+  color: #1c1c1c;
+}
+
+.product-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.star {
+  font-size: 20px;
+  color: #555;
+}
+
+.star.filled {
+  color: #FFD700;
+}
+
+.review-count {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.price {
+  font-size: 26px;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+.original {
+  font-size: 18px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.discount {
+  background: #2c2c2c;
+  color: #FFD700;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.stock {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #ccc;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+.tag-row {
+  margin-bottom: 20px;
+}
+
+.tag {
+  background: #333;
+  color: #FFD700;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-right: 8px;
+  font-size: 13px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.cart-btn,
+.wishlist-btn {
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+}
+
+.cart-btn {
+  background: #FFD700;
+  color: #000;
+}
+
+.cart-btn:hover {
+  background: #e2be00;
+}
+
+.wishlist-btn {
+  background: transparent;
+  border: 2px solid #FFD700;
+  color: #FFD700;
+}
+
+.wishlist-btn.active {
+  background: #FFD700;
+  color: #1c1c1c;
+}
+
+.added-message {
+  margin-top: 10px;
+  background: #333;
+  color: #FFD700;
+  padding: 10px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+
+.black-gold-bg {
+  background-color: #111;
+  color: #ffd700;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.product-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.05);
+}
+
+/* ...reuse earlier classes but change colors to match gold/black... */
+
+.cart-btn {
+  background: #ffd700;
+  color: #111;
+  font-weight: 600;
+}
+
+.cart-btn:hover {
+  background: #facc15;
+}
+
+.wishlist-btn {
+  border: 2px solid #ffd700;
+  color: #ffd700;
+}
+
+.wishlist-btn.active {
+  background: #ffd700;
+  color: #111;
+}
+
+
+.reverse-layout {
+  flex-direction: row-reverse;
+}
+
+.black-gold-bg {
+  background-color: #111;
+  color: #ffd700;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* You can keep rest of the CSS as is, with black/gold overrides like: */
+
+.product-title {
+  color: #ffd700;
+}
+
+.price {
+  color: #ffd700;
+}
+
+.cart-btn {
+  background: #ffd700;
+  color: #111;
+  font-weight: 600;
+}
+
+.wishlist-btn {
+  border: 2px solid #ffd700;
+  color: #ffd700;
+}
+
+.wishlist-btn.active {
+  background: #ffd700;
+  color: #111;
+}
