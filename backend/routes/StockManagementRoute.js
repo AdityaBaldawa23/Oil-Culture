@@ -111,7 +111,7 @@ router.put(
 
       // ✅ Handle image logic
       if (req.files && req.files.length > 0) {
-        updateData.productImages = req.files.map((file) => file.filename);
+        updateData.productImages = req.files.map((file) => file.path);
       } else if (existingImages) {
         updateData.productImages = JSON.parse(existingImages);
       }

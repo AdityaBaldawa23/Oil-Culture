@@ -51,7 +51,6 @@ export default function Card({ item }) {
   };
 
   const hasDiscount = item.originalPrice && item.originalPrice > item.productPrice;
-  const IMAGE_BASE_URL = "https://oil-culture.onrender.com/uploads/";
 
   return (
     <div
@@ -60,7 +59,7 @@ export default function Card({ item }) {
       onMouseLeave={() => setHover(false)}
     >
       <div className="card-image">
-        <img src={item.productImages[0]} alt={item.productName} />
+        <img src={`https://res.cloudinary.com/dkoj8snhw/image/upload/${item.productImages[0]}.jpg`} alt={item.productName} />
         {item.isNew && <span className="badge new">New</span>}
         {item.isBestseller && <span className="badge bestseller">🔥 Bestseller</span>}
       </div>
