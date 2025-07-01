@@ -89,8 +89,6 @@ const MainPage = () => {
     }, []);
     console.log(topProduct.productImages);
 
-    const IMAGE_BASE_URL = "https://oil-culture.onrender.com/uploads/";
-
     return (
         <>
             <Navbar />
@@ -119,7 +117,7 @@ const MainPage = () => {
                     <div className="product-list-scroll">
                         {topProduct.map((product) => {
                             const imageUrl = product.productImages && product.productImages.length > 0
-                                ? `https://oil-culture.onrender.com/uploads/${product.productImages[0]}`
+                                ? `https://res.cloudinary.com/dkoj8snhw/image/upload/${product.productImages[0]}.jpg`
                                 : "fallback.jpg";
 
                             return (
