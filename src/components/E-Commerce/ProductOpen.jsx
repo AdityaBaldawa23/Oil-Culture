@@ -26,7 +26,7 @@ export default function ProductDetails() {
   const productId = location.state?.productId;
   useEffect(() => {
   if (productId) {
-    fetch(`http://localhost:5000/admin/product/displayByID/${productId}`)
+    fetch(`https://oil-culture.onrender.com/admin/product/displayByID/${productId}`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch(console.error);
