@@ -4,16 +4,30 @@ nav.navbar {
   top: 0;
   width: 100%;
   z-index: 999;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  background: black;
   padding: 18px 0;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
 }
-
+nav.navbar.ecom{
+  background: black;
+  padding: 0px;
+}
 /* === SCROLLED STATE === */
 nav.navbar.scrolled {
   background: #f8f6f4;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 5px 0px;
+}
+
+nav.navbar.prod.scrolled{
+  background: black;
+  padding: 0px;
+}
+
+nav.navbar.ecom.scrolled{
+  background: #f8f6f4;
+  padding: 0px;
 }
 
 /* === LOGO === */
@@ -59,6 +73,11 @@ nav.navbar.scrolled .logo {
   color: #000;
 }
 
+.navbar.scrolled.prod .nav-links a,
+.navbar.scrolled.prod .nav-links button {
+  color: #ffa500;
+}
+
 /* === ACTIVE LINK === */
 .nav-links a.active {
   background-color: #ffa500;
@@ -99,6 +118,10 @@ nav.navbar.scrolled .logo {
   color: #000;
 }
 
+.navbar.scrolled.prod.cart-btn {
+  color: #ffa500;
+}
+
 .cart-btn:hover {
   color: #ff8c00;
 }
@@ -137,7 +160,7 @@ nav.navbar.scrolled .logo {
 
   .nav-links {
     flex-direction: column;
-    background: #1a1a1a;
+    background: #fbfafa;
     position: absolute;
     top: 100%;
     left: 0;
@@ -160,6 +183,7 @@ nav.navbar.scrolled .logo {
   .nav-links button {
     width: 100%;
     text-align: center;
+    align-items: center;
   }
 
   .logout-btn {

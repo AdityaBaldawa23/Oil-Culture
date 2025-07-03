@@ -8,7 +8,7 @@ const TermsAndConditions = () => {
                 <h1 className="terms-title">Terms and Conditions</h1>
 
                 <p className="terms-intro">
-                    Welcome to <span className="highlight">OilCulture.in</span>! These Terms and Conditions ("Terms", "Terms and Conditions") govern your use of our website located at www.yourwebsitename.com (together or individually “Service”) operated by YourWebsiteName.
+                    Welcome to <span className="highlight">OilCulture.in</span>! These Terms and Conditions ("Terms", "Terms and Conditions") govern your use of our website located at www.oilculture.in (together or individually “Service”) operated by Oil Culture.
                 </p>
 
                 <div className="terms-section">

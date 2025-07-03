@@ -48,10 +48,31 @@
   border-radius: 2px;
 }
 
+#Back {
+  position: absolute;
+  width: 100%;
+  top: 60px;
+  z-index: 10;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), url('../../assets/11.jpg'); 
+  background-size: contain;
+  background-position: center;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 0 20px;
+}
+
+
 
 @media (max-width: 768px) {
   .filter-container {
     flex-wrap: wrap;
     justify-content: center;
+  }
+  #Back{
+    background-size: cover;
   }
 }

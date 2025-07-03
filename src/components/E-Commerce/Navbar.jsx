@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-import { useCart } from "./ContextReducer";
+import {useDispatchCart ,useCart } from "./ContextReducer";
 import Modal from "../../Modal";
 import Cart from "../../Pages/E-Commerce/Cart";
 import "./Navbar.css"; 
@@ -15,6 +15,7 @@ export default function Navbar() {
   const location = useLocation();
   const isEcom = location.pathname === '/shop'
   const isPro = location.pathname === '/profile'
+  const Pro = location.pathname.startsWith('/product/');
   const data = useCart();
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`navbar ${isScrolled ? "scrolled" : ""} ${isEcom ? "ecom" : ""} ${isPro ? "pro" : ""}`}>
+      <nav className={`navbar ${isScrolled ? "scrolled" : ""} ${isEcom ? "ecom" : ""} ${isPro ? "pro" : ""} ${Pro ? "prod": ""} `}>
         <div className="container">
           <Link to="/" className="logo">
             <img src={logo} alt="Oil Culture Logo" className="logo-img" />

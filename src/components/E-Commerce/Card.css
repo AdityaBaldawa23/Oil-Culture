@@ -156,10 +156,24 @@
   box-shadow: 0 6px 18px rgba(204, 133, 0, 0.4);
 }
 
+.see-more {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #5d64b7, #3d55ad);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 18px rgba(204, 133, 0, 0.4);
+}
+
 .add-to-cart:hover {
   background: linear-gradient(135deg, #b37400, #995c00);
   box-shadow: 0 10px 24px rgba(204, 133, 0, 0.6);
-  animation: pulse 1.2s infinite;
+  animation: pulse 1s infinite;
 }
 
 @keyframes pulse {

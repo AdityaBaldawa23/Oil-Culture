@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatchCart, useCart } from "./ContextReducer";
+import { useNavigate } from 'react-router-dom';
 import "./Card.css";
 
 export default function Card({ item }) {
@@ -10,6 +11,7 @@ export default function Card({ item }) {
   const [quantity, setQuantity] = useState(1);
   const authToken = localStorage.getItem("authToken");
   const isLoggedIn = Boolean(authToken);
+  let navigate = useNavigate();
 
   const bottleSizes = [
     { label: "200ml", value: 0.2 },
@@ -24,33 +26,42 @@ export default function Card({ item }) {
       return;
     }
 
-    const finalQuantity = quantity * bottleSize
-    const existingItem = data.find((cartItem) => cartItem.id === item._id);
+    const finalQuantity = quantity * bottleSize;
+    const productLabel = `${item.productName} (${bottleSize}L)`;
+    const existingItem = data.find(
+      (cartItem) => cartItem.id === item._id && cartItem.size === bottleSize
+    );
 
     if (existingItem) {
       await dispatch({
         type: "UPDATE",
         id: item._id,
-        name: `${item.productName} (${bottleSize}L)`,
+        name: productLabel,
         price: item.productPrice,
-        MRP: item.originalPrice,
+        mrp: item.originalPrice,
         quantity: finalQuantity,
+        size: bottleSize
       });
       alert("🛒 Cart updated!\n\nWe've adjusted the quantity for this item.");
     } else {
       await dispatch({
         type: "ADD",
         id: item._id,
-        name: `${item.productName} (${bottleSize}L)`,
+        name: productLabel,
         price: item.productPrice,
         mrp: item.originalPrice,
         quantity: finalQuantity,
+        size: bottleSize
       });
       alert("🎉 Added to Cart!\n\nYour item has been successfully added.");
     }
   };
 
   const hasDiscount = item.originalPrice && item.originalPrice > item.productPrice;
+  const slugify = (str) =>
+    str.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
+
+  const slug = slugify(item.productName);
 
   return (
     <div
@@ -59,20 +70,20 @@ export default function Card({ item }) {
       onMouseLeave={() => setHover(false)}
     >
       <div className="card-image">
-        <img src={`https://res.cloudinary.com/dkoj8snhw/image/upload/${item.productImages[0]}.jpg`} alt={item.productName} />
+        <img src={item.productImages[0]} alt={item.productName} />
         {item.isNew && <span className="badge new">New</span>}
         {item.isBestseller && <span className="badge bestseller">🔥 Bestseller</span>}
       </div>
 
       <div className="card-content">
         <h5>{item.productName}</h5>
-        <h6>{item.productSize} Litre</h6>
+        {/* <h6>{item.productSize} Litre</h6> */}
 
-        <div className="rating">
+        {/* <div className="rating">
           ⭐ {item.productRating.toFixed(1)} ({item.reviewCount} reviews)
-        </div>
+        </div> */}
 
-        <p>{item.productDescription}</p>
+        {/* <p>{item.productDescription}</p> */}
 
         <div className="tag-list">
           {item.tags.map((tag, index) => (
@@ -138,15 +149,25 @@ export default function Card({ item }) {
 
         </div>
 
-        <h6 className="stock-info">
+        {/* <h6 className="stock-info">
           Only <span>{item.stock}</span> left !!
-        </h6>
+        </h6> */}
 
         {isLoggedIn && (
           <button className="add-to-cart" onClick={HandleAddToCart}>
             Add to Cart
           </button>
         )}
+        <br />
+        <button className="see-more"
+          onClick={() =>
+            navigate(`/product/${slug}`, {
+              state: { productId: item._id }  // Send ID here
+            })
+          }
+        >
+          See More
+        </button>
       </div>
     </div>
   );

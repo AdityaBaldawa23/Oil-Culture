@@ -56,10 +56,6 @@ const Profile = () => {
     fetchMyOrder();
   }, []);
 
-  const handleSave = () => {
-    alert("Profile updated successfully!");
-  };
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -147,16 +143,13 @@ const Profile = () => {
                     }
                   ></textarea>
                 </label>
-                <button className="save-btn" onClick={handleSave}>
-                  Save Changes
-                </button>
               </div>
             </div>
           )}
 
           {activeSection === "orders" && (
             <div>
-              <h2 className="mb-4 fw-bold">🛒 My Orders</h2>
+              <h1>🛒 My Orders</h1>
               {loading ? (
                 <div className="text-center fs-5">Loading your orders...</div>
               ) : orderError ? (
@@ -170,7 +163,7 @@ const Profile = () => {
                   {orderData?.order_data?.slice().reverse().map((order, index) => (
                     <div key={index} className="mb-5">
                       <div className="text-center mb-4">
-                        <h5 className="text-uppercase text-secondary">
+                        <h5 className="text-uppercase">
                           🗓️ Order Date:{" "}
                           {new Date(order.orderDate).toLocaleDateString()}
                         </h5>
@@ -188,21 +181,23 @@ const Profile = () => {
 
                       <div className="row justify-content-center">
                         {(order.productsBought || []).map((item, subIndex) => (
-                          <div key={subIndex} className="col-12 col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
-                            <div className="card shadow-sm border-0 w-100">
-                              <div className="card-body d-flex flex-column">
-                                <h5 className="card-title mb-2">{item.productName}</h5>
-                                <div className="mb-2 text-muted small">
-                                  <span className="me-3"><strong>Qty:</strong> {item.quantity}</span>
-                                  <span className="me-3"><strong>Price/item:</strong> ₹{item.price}</span>
-                                </div>
-                                <div className="mt-auto fs-5 text-end text-primary fw-bold">
-                                  ₹{item.price * item.quantity}/-
-                                </div>
+                          <div
+                            key={subIndex}
+                            className="col-12 col-md-6 col-lg-4 mb-4 d-flex align-items-stretch"
+                          >
+                            <div className="product-card w-100">
+                              <h4>{item.productName}</h4>
+                              <div className="product-details">
+                                <span><strong>Qty:</strong> {item.quantity} </span><br />
+                                <span><strong>Price/item:</strong> ₹{item.price}</span>
+                              </div>
+                              <div className="product-total">
+                                <span><strong>Grand Total: </strong>₹{item.price * item.quantity}/-</span>
                               </div>
                             </div>
                           </div>
                         ))}
+
                       </div>
                     </div>
                   ))}

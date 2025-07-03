@@ -28,7 +28,7 @@ function App() {
             <Route path="/admin-manage" element={<ManageProduct />} />
             <Route path="/add-new-bill" element={<BillingForm />} />
             <Route path="/terms" element={<TermsAndConditions />} />
-            <Route path="/product" element={<ProductDetails />} />
+            <Route path="/product/:slug" element={<ProductDetails />} />
           </Routes>
         </div>
       </BrowserRouter>

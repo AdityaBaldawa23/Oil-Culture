@@ -117,7 +117,7 @@ const MainPage = () => {
                     <div className="product-list-scroll">
                         {topProduct.map((product) => {
                             const imageUrl = product.productImages && product.productImages.length > 0
-                                ? `https://res.cloudinary.com/dkoj8snhw/image/upload/${product.productImages[0]}.jpg`
+                                ? product.productImages[0]
                                 : "fallback.jpg";
 
                             return (

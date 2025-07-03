@@ -6,47 +6,47 @@ body {
 
 .terms-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(135deg, #fdf3e7, #f6e3cd, #ecd9c6);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
-  color: #fff;
+  color: #3a2e2e;
 }
 
 .terms-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
   border-radius: 20px;
   padding: 40px;
   max-width: 900px;
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  color: #e0e0e0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(120, 85, 50, 0.25);
+  color: #3d2b1f;
 }
 
 .terms-title {
   text-align: center;
   font-size: 36px;
   font-weight: 800;
-  color: #bb86fc;
+  color: #b86b00; /* Rich golden brown */
   margin-bottom: 30px;
 }
 
 .terms-intro {
   font-size: 18px;
   margin-bottom: 25px;
-  color: #ddd;
+  color: #5b4332;
 }
 
 .highlight {
   font-weight: bold;
-  color: #ff80ab;
+  color: #c96f2c;
 }
 
 .terms-section h2 {
-  color: #d1aaff;
+  color: #9c5a13;
   font-size: 20px;
   margin-top: 25px;
   margin-bottom: 10px;
@@ -55,12 +55,12 @@ body {
 .terms-section p {
   font-size: 16px;
   line-height: 1.6;
-  color: #ccc;
+  color: #4e392b;
 }
 
 .terms-footer {
   text-align: center;
   margin-top: 40px;
   font-size: 14px;
-  color: #999;
+  color: #7b5f47;
 }

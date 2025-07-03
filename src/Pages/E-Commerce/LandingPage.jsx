@@ -3,7 +3,7 @@ import Navbar from "../../components/E-Commerce/Navbar.jsx";
 import Card from "../../components/E-Commerce/Card.jsx";
 import Footer from "../../components/E-Commerce/Footer";
 import "./LandingPage.css";
-import MangoFarm from "../../assets/MangoFarm.jpg";
+import MangoFarm from "../../assets/11.jpg";
 
 export default function LandingPage() {
   const [FoodCat, setFoodCat] = useState([]);
@@ -47,24 +47,7 @@ export default function LandingPage() {
     <div className="food-app">
       <Navbar />
 
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          top: 0,
-          zIndex: 10,
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url(${MangoFarm})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: "80vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "white",
-          textAlign: "center",
-          padding: "0 20px",
-        }}
-      >
+      <div id="Back">
         <div style={{
           backgroundColor: 'rgba(255, 255, 255, 0.15)',
           backdropFilter: 'blur(10px)',
@@ -121,7 +104,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="container py-5" style={{ marginTop: "70vh" }}>
+      <div className="container py-5" style={{ marginTop: "85vh" }}>
         {loading ? (
           <div className="text-center">Loading...</div>
         ) : FoodCat.length > 0 ? (

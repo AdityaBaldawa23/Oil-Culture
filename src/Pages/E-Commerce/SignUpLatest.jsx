@@ -63,10 +63,6 @@ const Signup = () => {
     }
   };
 
-  const handleLoginClick = () => {
-    alert('Login page would be navigated to here');
-  };
-
   return (
     <div className="signup-container">
       <div className="signup-background">
